@@ -1,4 +1,5 @@
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 
 export default function TravelGuidePage() {
@@ -6,7 +7,7 @@ export default function TravelGuidePage() {
 
     useEffect(() => {
         axios
-          .get(`${process.env.REACT_APP_APIURL}/`)
+          .get(`${process.env.REACT_APP_API_URL}/api/travelguide`)
           .then((response) => {
             setTravelGuide(response.data);
             console.log(response.data);
@@ -44,4 +45,3 @@ export default function TravelGuidePage() {
 
 
 
-}

@@ -5,6 +5,7 @@ import AuthPage from './pages/AuthPage';
 
 import HomePage from './pages/HomePage';
 import { Routes, Route } from 'react-router-dom';
+import TravelGuidePage from './pages/TravelGuidePage';
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
      <Navbar/>
       <Routes>
         <Route path='/' element={<HomePage/>}/>
+        <Route path='/travelguide' element={<TravelGuidePage/>}/>
         <Route path="/Register" element={<AuthPage />} />
+
 
         
       </Routes>

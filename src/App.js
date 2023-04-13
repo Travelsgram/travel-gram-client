@@ -2,6 +2,7 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import AuthPage from './pages/AuthPage';
+
 import HomePage from './pages/HomePage';
 import { Routes, Route } from 'react-router-dom';
 
@@ -12,8 +13,10 @@ function App() {
 
      <Navbar/>
       <Routes>
-      <Route path='/' element={<HomePage/>}/>
-        <Route path="/Register" element={<AuthPage />}/>
+        <Route path='/' element={<HomePage/>}/>
+        <Route path="/Register" element={<AuthPage />} />
+
+        
       </Routes>
     </div>
   );

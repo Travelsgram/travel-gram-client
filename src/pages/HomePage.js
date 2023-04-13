@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Like from "../../public/images/Like.png"
-import NotLike from "../../public/images/NotLike.png"
+
 
 function HomePage() {
   const [posts, setPosts] = useState([]);
@@ -25,11 +24,6 @@ function HomePage() {
           return (
             <div key={post._id} className="Post">
               <img src={post.image} alt={post.image.name} />
-              <div className="Like-Comment">
-              <img src={post.likes ? Like : NotLike} alt="" />
-              <img src={post.comment} alt="" />
-         </div>
-         <span> {post.likes} likes </span>
            
             </div>
           );

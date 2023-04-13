@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import axios from "axios";
 import Signup from "../components/Signup";
+import Login from "../components/Login";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
 function AuthPage(props){
     const [email, setEmail] = useState("");
@@ -13,19 +16,25 @@ function AuthPage(props){
     const [errorMessage, setErrorMessage] = useState(undefined);
     const [form, setForm] = useState("Signup")
 
-    
+    const navigate = useNavigate()
 
+    const { storeToken, authenticateUser } = useContext(AuthContext);
+    
     const handleSignupSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         const req = { email, password, name, profileImg, birthdate, location };
 
         axios
             .post(`${process.env.REACT_APP_API_URL}/auth/signup`, req)
             .then( response => {
-                toggleForm();
+                setName("");
+                setProfileImg("");
+                setBirthdate("");
+                setLocation("");
+                setForm("Login")
             })
-            .catch((error) => {
+            .catch( error => {
                 const errorDescription = error.response.data.message;
                 setErrorMessage(errorDescription);
             })
@@ -33,7 +42,22 @@ function AuthPage(props){
     }
 
     const handleLoginSubmit = (e) => {
+        e.preventDefault();
 
+        const req = { email, password};
+
+        axios
+            .post(`${process.env.REACT_APP_API_URL}/auth/login`, req)
+            .then( response => {
+                storeToken(response.data.authToken);
+
+                authenticateUser()
+                navigate("/")
+            })
+            .catch( error => {
+                const errorDescription = error.response.data.message;
+                setErrorMessage(errorDescription);
+              })
     };
 
     const toggleForm = () => {
@@ -64,6 +88,18 @@ function AuthPage(props){
             errorMessage={errorMessage}
             toggleForm={toggleForm}
             />
+        }
+        {form === "Login" &&
+        <Login 
+            handleLoginSubmit={handleLoginSubmit}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            errorMessage={errorMessage}
+            toggleForm={toggleForm}
+        />
+
         }
 
 

@@ -14,7 +14,7 @@ function HomePage() {
       { headers: {Authorization: `Bearer ${storedToken}`}})
       .then((response) => {
         setPosts(response.data);
-        console.log(response.data);
+      
       })
       .catch((err) => console.log("error getting posts from API", err));
   }, []);

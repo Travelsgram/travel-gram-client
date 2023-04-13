@@ -10,6 +10,7 @@ function AuthProviderWrapper(props){
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState(null);
+    const [storedToken, setStoredToken] = useState(null)
 
     const storeToken = (token) => {
         localStorage.setItem("authToken", token);
@@ -17,7 +18,7 @@ function AuthProviderWrapper(props){
 
     const authenticateUser = () => {
         const storedToken = localStorage.getItem("authToken");
-
+        setStoredToken(storedToken);
         if(storedToken){
             axios.get(
                 `${process.env.REACT_APP_API_URL}/auth/verify`,
@@ -65,7 +66,8 @@ function AuthProviderWrapper(props){
                 user,
                 storeToken,
                 authenticateUser,
-                logOutUser
+                logOutUser,
+                storedToken
             }}>
             {props.children}
         </AuthContext.Provider >

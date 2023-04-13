@@ -14,7 +14,6 @@ useEffect(() => {
       { headers: {Authorization: `Bearer ${storedToken}`}})
       .then((response) => {
         setUsers(response.data);
-        console.log(response.data);
       })
       .catch((err) => console.log("error getting user from API", err));
   }, []);

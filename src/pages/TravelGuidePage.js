@@ -12,7 +12,7 @@ export default function TravelGuidePage() {
             setTravelGuide(response.data);
             console.log(response.data);
           })
-          .catch((err) => console.log("error getting posts from API", err));
+          .catch((err) => console.log("error getting travelguide from API", err));
       }, []);
     
       return (

@@ -15,6 +15,10 @@ function Navbar() {
       <button> SignUp / Login</button>
       </Link>
  
+      <Link to="/userprofile"> 
+      <button> User Profile</button>
+      </Link>
+ 
 
     </nav>
   );

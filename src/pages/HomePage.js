@@ -24,7 +24,7 @@ function HomePage() {
         posts.map((post) => {
           return (
             <div key={post._id} className="Post">
-              <img src={post.image} alt={post.image.name} />
+              <img src={post.image} alt={post.name} />
            <p> Comment : {post.comment} </p>
            <p>Location : {post.location} </p>
           

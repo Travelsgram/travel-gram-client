@@ -24,7 +24,9 @@ function HomePage() {
           return (
             <div key={post._id} className="Post">
               <img src={post.image} alt={post.image.name} />
-           
+           <p> Comment : {post.comment} </p>
+           <p>Location : {post.location} </p>
+          
             </div>
           );
         })

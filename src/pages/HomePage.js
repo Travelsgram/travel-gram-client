@@ -3,11 +3,11 @@ import axios from "axios";
 
 
 function HomePage() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_APIURL}/`)
+      .get(`${process.env.REACT_APP_API_URL}/api/posts`)
       .then((response) => {
         setPosts(response.data);
         console.log(response.data);

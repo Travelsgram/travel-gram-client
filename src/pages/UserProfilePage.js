@@ -1,47 +1,33 @@
-import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 
+function UserProfilePage(){
+    const [curUser, setCurUser] = useState();
+    const { storedToken, user } = useContext(AuthContext)
 
-export default function UserProfile() {
-const [users, setUsers] = useState(null)
-
-const {storedToken} = useContext(AuthContext);
-
-useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/users`,
-      { headers: {Authorization: `Bearer ${storedToken}`}})
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((err) => console.log("error getting user from API", err));
-  }, []);
-
-  return (
-    <div>
-      <h1>User Profile Information</h1>
-
-      {users ? (
-        users.map((user) => {
-          return (
-            <div key={user._id} className="User">
-            <p> Name: {user.name}</p>
-            <p> Email: {user.email}</p>
-            <img src={user.profileImg} alt={user.name} />
-            <p> Birthday : {user.birthdate} </p>
-            <p> Location: {user.location}</p>
-    
-            </div>
-          );
+    useEffect( () => {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/api/users/${user._id}`,
+        { headers: {Authorization: `Bearer ${storedToken}`}})
+        .then( response => {
+            setCurUser(response.data)
         })
-      ) : (
-        <p> Loading user information...</p>
-      )}
-    </div>
-  );
+        .catch( error => console.log("error getting usersDetails", error))
+    },[])
+  return(
+    <>{curUser &&
+        <>
+          <img src={curUser.image} alt="profilepic" />
+          <h2>{curUser.name}</h2>
+          <p>{curUser.location}</p>
+          <p>{curUser.posts}</p>
+          <p>{curUser.travelguides}</p>
+        </>
+      }
 
-
-
-
+    </>
+  )
 }
+
+export default UserProfilePage;

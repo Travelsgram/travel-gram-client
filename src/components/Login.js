@@ -28,7 +28,7 @@ function Login(props){
         { props.errorMessage && <p className="error-message">{props.errorMessage}</p> }
    
         <p>Don't have an account yet?</p>
-        <button onClick={props.toggleForm}>Login</button>
+        <button onClick={props.toggleForm}>Signup</button>
       </div>
     )
 }

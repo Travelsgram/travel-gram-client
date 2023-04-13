@@ -1,12 +1,9 @@
 
 import './App.css';
-<<<<<<< HEAD
-import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import AuthPage from './pages/AuthPage';
 import HomePage from './pages/HomePage';
-=======
 import { Routes, Route } from 'react-router-dom';
->>>>>>> dd97d3f16d949ca7f11f1b29e3257cebfdea53d5
 
 function App() {
   return (
@@ -15,11 +12,8 @@ function App() {
 
      <Navbar/>
       <Routes>
-<<<<<<< HEAD
-      <Route path='/' element={<HomePage/>}/>
-=======
-        <Route path="/Register"/>
->>>>>>> dd97d3f16d949ca7f11f1b29e3257cebfdea53d5
+        <Route path='/' element={<HomePage/>}/>
+        <Route path="/Register" element={<AuthPage />}/>
       </Routes>
     </div>
   );

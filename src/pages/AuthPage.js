@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import Signup from "../components/Signup";
 
@@ -13,7 +13,7 @@ function AuthPage(props){
     const [errorMessage, setErrorMessage] = useState(undefined);
     const [form, setForm] = useState("Signup")
 
-    const navigate = useNavigate();
+    
 
     const handleSignupSubmit = (e) => {
         e.preventDefault()
@@ -21,7 +21,7 @@ function AuthPage(props){
         const req = { email, password, name, profileImg, birthdate, location };
 
         axios
-            .post(`${process.env.REACT_APP_API_URL}/auth/signup`)
+            .post(`${process.env.REACT_APP_API_URL}/auth/signup`, req)
             .then( response => {
                 toggleForm();
             })

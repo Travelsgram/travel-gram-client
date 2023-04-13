@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
+import { Link } from "react-router-dom";
 
 
 export default function TravelGuidePage() {
@@ -26,19 +27,24 @@ export default function TravelGuidePage() {
             travelguide.map((travel) => {
               return (
                 <div key={travel._id} className="Travel">
-                <h2>Title : {travel.title} </h2>
+                <h2>{travel.title} </h2>
                   <img src={travel.image} alt={travel.image.name} />
-               <p> Activities : {travel.activities} </p>
-               <p>Tips : {travel.tips} </p>
-               <p>Location : {travel.location}</p>
-               <p>Description: {travel.description}</p>
+                  
+                  <Link to={`/travelguide/${travel._id}`} >
+                  <button>More details</button>
+                   </Link>
               
                 </div>
               );
             })
           ) : (
             <p> Loading posts...</p>
+          
           )}
+
+          
+            
+            
         </div>
       );
     }

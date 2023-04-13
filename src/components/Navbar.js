@@ -19,6 +19,11 @@ function Navbar() {
       <Link to="/travelguide"> 
       <button> Travel Guide</button>
       </Link>
+
+      <Link to="/users"> 
+      <button> User List </button>
+      </Link>
+
       {!isLoggedIn && 
       <>
         <Link to="/register"> 
@@ -30,14 +35,14 @@ function Navbar() {
       {isLoggedIn &&
       <>
         <button onClick={logOutUser}>Logout</button>
-        <span>{user && user.name}</span>
+        
       </>
         
       }
       
  
       <Link to="/userprofile"> 
-      <button> User Profile</button>
+      <span>{user && user.name}</span>
       </Link>
  
 

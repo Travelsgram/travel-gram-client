@@ -1,13 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/auth.context";
 
 
 export default function TravelGuidePage() {
     const [travelguide, setTravelGuide] = useState([]);
-
+    
+    const {storedToken} = useContext(AuthContext);
     useEffect(() => {
         axios
-          .get(`${process.env.REACT_APP_API_URL}/api/travelguide`)
+          .get(`${process.env.REACT_APP_API_URL}/api/travelguide`,
+          { headers: {Authorization: `Bearer ${storedToken}`}})
           .then((response) => {
             setTravelGuide(response.data);
             console.log(response.data);

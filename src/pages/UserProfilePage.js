@@ -1,13 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/auth.context";
 
 
 export default function UserProfile() {
 const [users, setUsers] = useState(null)
 
+const {storedToken} = useContext(AuthContext);
+
 useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/users`)
+      .get(`${process.env.REACT_APP_API_URL}/api/users`,
+      { headers: {Authorization: `Bearer ${storedToken}`}})
       .then((response) => {
         setUsers(response.data);
         console.log(response.data);

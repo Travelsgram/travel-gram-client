@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
-import { Link } from "react-router-dom";
+import UserInfo from "../components/UserInfo";
 
 function UserProfilePage(){
     const [curUser, setCurUser] = useState();
@@ -30,18 +30,7 @@ function UserProfilePage(){
     }
   return(
     <>
-    {curUser &&
-        <>
-          <img src={curUser.image} alt="profilepic" />
-          <h2>{curUser.name}</h2>
-          <p>{curUser.location}</p>
-          <p>{curUser.posts}</p>
-          <p>{curUser.travelguides}</p>
-
-          <button onClick={()=>{deleteProfile()}}>delete my profile</button>
-          <Link to="/user-update">update my profile</Link>
-        </>
-      }
+    {curUser && <UserInfo curUser={curUser} deleteProfile={deleteProfile} />}
 
     </>
   )

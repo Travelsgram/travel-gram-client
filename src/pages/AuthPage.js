@@ -48,7 +48,7 @@ function AuthPage(props){
 
         axios
             .post(`${process.env.REACT_APP_API_URL}/auth/login`, req)
-            .then( response => {
+            .then( response => {
                 storeToken(response.data.authToken);
 
                 authenticateUser()

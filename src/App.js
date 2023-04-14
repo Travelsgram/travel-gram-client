@@ -8,7 +8,7 @@ import TravelGuidePage from './pages/TravelGuidePage';
 import UserProfilePage from "./pages/UserProfilePage";
 import TravelGuideDetails from './pages/TravelGuideDetails';
 import UserList from "./pages/UsersList";
-import UserProfileEdit from './pages/UserProfileEdit';
+
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         <Route path="/userprofile" element={<UserProfilePage />} />
         <Route path="/travelguide/:travelguideId" element={<TravelGuideDetails />} />
         <Route path='/users' element={<UserList/>}/>
-        <Route path='/user-update' element={<UserProfileEdit />}/>
+        
 
 
       </Routes>

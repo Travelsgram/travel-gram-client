@@ -1,19 +1,21 @@
-import { Link } from "react-router-dom"
 
 function UserInfo(props){
 
     return(
         <>
-            <img src={props.curUser.image} alt="profilepic" />
-            <h2>{props.curUser.name}</h2>
-            <p>{props.curUser.location}</p>
-            <p>{props.curUser.posts}</p>
-            <p>{props.curUser.travelguides}</p>
+            <h2>my information</h2>
+            <img src={props.image} alt="profilepic" />
+            <h2>{props.name}</h2>
+            <p>{props.location}</p>
 
             <button onClick={()=>{props.deleteProfile()}}>delete my profile</button>
-            <Link to="/user-update">update my profile</Link>
+            <button onClick={()=>{props.profileUpdate()}}>update my profile</button>
+
+            <button onClick={props.postCreate}>create new post</button>
+            <button onClick={props.travelguideCreate}>create new travelguide</button>
         </>
     )
+
 }
 
-export default UserInfo
+export default UserInfo;

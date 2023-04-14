@@ -10,8 +10,9 @@ function HomePage() {
   const {storedToken} = useContext(AuthContext)
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/posts`,
-      { headers: {Authorization: `Bearer ${storedToken}`}})
+      .get(
+        `${process.env.REACT_APP_API_URL}/api/posts`,
+        { headers: {Authorization: `Bearer ${storedToken}`}})
       .then((response) => {
         setPosts(response.data);
       

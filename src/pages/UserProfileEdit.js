@@ -1,17 +1,19 @@
 import { useContext, useState } from "react";
 import UserEdit from "../components/UserEdit";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { useNavigate } from "react-router-dom";
 
-function UserProfileEdit(){
+function UserProfileEdit(props){
     const {storedToken, user} = useContext(AuthContext);
+
+   
     
     const def = {
-        name:user.name,
-        email: user.email,
-        profileImg: user.profileImg,
-        location: user.location
+        name:props.curUser.name,
+        email: props.curUser.email,
+        profileImg: props.curUser.profileImg,
+        location: props.curUser.location
     }
     
     const [name, setName] = useState(def.name);
@@ -19,14 +21,12 @@ function UserProfileEdit(){
     const [profileImg, setProfileImg] = useState(def.profileImg);
     const [location, setLocation] = useState(def.location);
 
-    
-
-    const navigate = useNavigate()
+    const naviate = useNavigate()
 
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
 
-        const data ={ name, email, profileImg, location}
+        const data ={ name, email, profileImg, location }
 
         axios
             .put(
@@ -35,7 +35,10 @@ function UserProfileEdit(){
                 { headers: {Authorization: `Bearer ${storedToken}`}})
             .then( response => {
                 
-                navigate("/userprofile");
+                
+                naviate("/userprofile");
+                props.profileUpdate();
+                props.getSiteUpdate();
             })
             .catch( error => console.log("error updating user profile", error))
     }
@@ -52,6 +55,7 @@ function UserProfileEdit(){
                 location={location}
                 setLocation={setLocation}
                 handleUpdateSubmit={handleUpdateSubmit}
+                
             />
         </>
     )

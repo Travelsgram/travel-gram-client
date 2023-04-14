@@ -4,7 +4,8 @@ import { AuthContext } from "../context/auth.context";
 
 function UserProfilePage(){
     const [curUser, setCurUser] = useState();
-    const { storedToken, user } = useContext(AuthContext)
+    
+    const { storedToken, user, logOutUser } = useContext(AuthContext)
 
     useEffect( () => {
       axios
@@ -15,14 +16,28 @@ function UserProfilePage(){
         })
         .catch( error => console.log("error getting usersDetails", error))
     },[])
+
+    const deleteProfile = () => {
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/api/users/${user._id}`,
+        { headers: {Authorization: `Bearer ${storedToken}`}})
+        .then( response => {
+          logOutUser()
+        })
+        .catch( error => console.log("error deleting userprofile", error))
+
+    }
   return(
-    <>{curUser &&
+    <>
+    {curUser &&
         <>
           <img src={curUser.image} alt="profilepic" />
           <h2>{curUser.name}</h2>
           <p>{curUser.location}</p>
           <p>{curUser.posts}</p>
           <p>{curUser.travelguides}</p>
+
+          <button onClick={()=>{deleteProfile()}}>delete my profile</button>
         </>
       }
 

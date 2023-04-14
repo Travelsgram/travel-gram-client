@@ -56,6 +56,18 @@ function UserProfilePage(){
         setProfileInfo(false)
       }
     }
+    const deletePost = (id) => {
+
+      axios
+        .delete(
+          `${process.env.REACT_APP_API_URL}/api/posts/${id}`,
+          { headers: {Authorization: `Bearer ${storedToken}`}}
+          )
+          .then( response => {
+            getSiteUpdate()
+          })
+          .catch( error => console.log("error deleting post", error))
+    }
     const travelguideCreate = () => {
       if(createTravelguideForm){
         setTravelguideForm(false)
@@ -65,11 +77,22 @@ function UserProfilePage(){
         setProfileInfo(false)
       }
     }
+    const deleteTravelguide = (id) => {
+
+      axios
+        .delete(
+          `${process.env.REACT_APP_API_URL}/api/travelguide/${id}`,
+          { headers: {Authorization: `Bearer ${storedToken}`}}
+        )
+        .then( response => {
+          getSiteUpdate()
+        })
+        .catch( error => console.log("error deleting travelguide", error))
+    }
     const getSiteUpdate = () => {
       getUpdate ? setGetUpdate(false) : setGetUpdate(true)
     }
    
-    
     const infoRender = () => {
       if(!updateForm){
         if(profileInfo){
@@ -108,6 +131,7 @@ function UserProfilePage(){
               <img src={post.image} alt="img" />
               <p>{post.location}</p>
               <p>{post.comment}</p>
+              <button onClick={()=>{deletePost(post._id)}}>delete my post</button>
             </div>
           )
         })}
@@ -124,6 +148,7 @@ function UserProfilePage(){
               <img src={travelguide.image} alt="img" />
               <p>{travelguide.location}</p>
               <p>{travelguide.comment}</p>
+              <button onClick={()=>{deleteTravelguide(travelguide._id)}}>delete my travelguide</button>
             </div>
           )
         })}

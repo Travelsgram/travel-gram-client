@@ -1,16 +1,23 @@
 import { useContext, useState } from "react";
 import UserEdit from "../components/UserEdit";
 import axios from "axios";
-import AuthPage from "./AuthPage";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
 function UserProfileEdit(){
-    const {storedToken, user} = useContext(AuthPage);
-
-    const [name, setName] = useState(user.name);
-    const [email, setEmail] = useState(user.email);
-    const [profileImg, setProfileImg] = useState(user.profileImg);
-    const [location, setLocation] = useState(user.location);
+    const {storedToken, user} = useContext(AuthContext);
+    
+    const def = {
+        name:user.name,
+        email: user.email,
+        profileImg: user.profileImg,
+        location: user.location
+    }
+    
+    const [name, setName] = useState(def.name);
+    const [email, setEmail] = useState(def.email);
+    const [profileImg, setProfileImg] = useState(def.profileImg);
+    const [location, setLocation] = useState(def.location);
 
     
 

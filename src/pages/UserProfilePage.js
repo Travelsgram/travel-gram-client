@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
+import { Link } from "react-router-dom";
 
 function UserProfilePage(){
     const [curUser, setCurUser] = useState();
@@ -38,6 +39,7 @@ function UserProfilePage(){
           <p>{curUser.travelguides}</p>
 
           <button onClick={()=>{deleteProfile()}}>delete my profile</button>
+          <Link to="/user-update">update my profile</Link>
         </>
       }
 

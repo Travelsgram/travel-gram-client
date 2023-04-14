@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { AuthContext } from "../context/auth.context";
+import service from "../api/service";
 
 
 
@@ -9,9 +9,8 @@ function HomePage() {
 
   const {storedToken} = useContext(AuthContext)
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/posts`,
-      { headers: {Authorization: `Bearer ${storedToken}`}})
+    
+      service.getPosts()
       .then((response) => {
         setPosts(response.data);
       

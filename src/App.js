@@ -9,6 +9,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import TravelGuideDetails from './pages/TravelGuideDetails';
 import UserList from "./pages/UsersList";
 
+
 function App() {
   return (
     <div className="App">
@@ -17,10 +18,11 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/travelguide' element={<TravelGuidePage/>}/>
-        <Route path="/Register" element={<AuthPage />} />
+        <Route path="/register" element={<AuthPage />} />
         <Route path="/userprofile" element={<UserProfilePage />} />
         <Route path="/travelguide/:travelguideId" element={<TravelGuideDetails />} />
         <Route path='/users' element={<UserList/>}/>
+        
 
 
       </Routes>

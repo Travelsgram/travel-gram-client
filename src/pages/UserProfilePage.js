@@ -131,6 +131,7 @@ function UserProfilePage(){
               <img src={post.image} alt="img" />
               <p>{post.location}</p>
               <p>{post.comment}</p>
+              <button>❤️{post.likes.length}</button>
               <button onClick={()=>{deletePost(post._id)}}>delete my post</button>
             </div>
           )

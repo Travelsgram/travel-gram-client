@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { AuthContext } from "../context/auth.context";
+import axios from "axios";
 
 
 
@@ -10,6 +10,8 @@ function HomePage() {
 
   const {storedToken} = useContext(AuthContext)
   useEffect(() => {
+    
+  
     axios
       .get(
         `${process.env.REACT_APP_API_URL}/api/posts`,

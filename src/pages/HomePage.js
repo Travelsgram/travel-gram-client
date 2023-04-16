@@ -3,7 +3,6 @@ import { AuthContext } from "../context/auth.context";
 import axios from "axios";
 
 
-
 function HomePage() {
   const [posts, setPosts] = useState(null);
   const [update, setUpdate] = useState(true)

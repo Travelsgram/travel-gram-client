@@ -124,6 +124,26 @@ function UserProfilePage(){
 
         {curUser && profileInfo &&
         <div>
+          <h2>people I'm following</h2>
+          {curUser.followers.map(follower => {
+            return(
+              <div key={follower._id}>
+                  <img src={follower.profileImg} alt="profile pic"/>
+                  <p>{follower.name}</p>
+                  <p>{follower.location}</p>
+                  <p>follows: {follower.followers.length} people</p>
+                  <p>posts:{follower.posts.length}</p>
+                  <p>travelguides: {follower.travelguides.length}</p>
+                  <hr></hr>
+                  <br></br>
+              </div>
+            )
+          })}
+        </div>
+        }
+
+        {curUser && profileInfo &&
+        <div>
         <h2>posts</h2>
         {curUser.posts.map(post => {
           return(

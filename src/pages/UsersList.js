@@ -4,9 +4,10 @@ import { AuthContext } from "../context/auth.context";
 
 
 export default function UserProfile() {
-const [users, setUsers] = useState(null)
+const [users, setUsers] = useState(null);
+const [getUpdate, setGetUpdate] = useState(true);
 
-const {storedToken, user} = useContext(AuthContext);
+const {storedToken} = useContext(AuthContext);
 
 useEffect(() => {
     axios
@@ -16,7 +17,7 @@ useEffect(() => {
         setUsers(response.data);
       })
       .catch((err) => console.log("error getting user from API", err));
-  }, []);
+  }, [getUpdate]);
 
   const addFollow = (followId) => {
 
@@ -26,10 +27,13 @@ useEffect(() => {
         { headers: {Authorization: `Bearer ${storedToken}`}}
         )
       .then(response =>{
-        console.log(response);
+        getSiteUpdate();
       })
       .catch((err) => console.log("error getting user from API", err))
 
+  }
+  const getSiteUpdate = () => {
+    getUpdate ? setGetUpdate(false) : setGetUpdate(true)
   }
 
   return (

@@ -8,18 +8,21 @@ function CreatePost(props){
     const [image, setImage] = useState("");
     const [location, setLocation] = useState("");
     const [comment, setComment] = useState("");
+    const [tags, setTags] = useState("");
 
     const navigate = useNavigate()
 
     const {user, storedToken} = useContext(AuthContext)
     const id = user._id
+
     const handleCreatePostSubmit = (e) => {
         e.preventDefault();
-        
+            const tagsArr = tags.split(" ")
         const data = {
             image: image,
             location: location,
             comment: comment,
+            tags: tagsArr,
             user: id
         }
 
@@ -31,6 +34,7 @@ function CreatePost(props){
                 setImage("");
                 setLocation("");
                 setComment("");
+                setTags("");
                 props.postCreate();
                 props.getSiteUpdate();
                 navigate("/userprofile")
@@ -66,6 +70,14 @@ function CreatePost(props){
                         value={comment}
                         onChange={(e)=>{setComment(e.target.value)}}
                     />
+
+                <label>Add Tags:</label>
+                    <input
+                        type="text"
+                        name="tags"
+                        value={tags}
+                        onChange={(e)=>{setTags(e.target.value)}}
+                     />
 
                 <button type="submit">Create new Post</button>
             </form>

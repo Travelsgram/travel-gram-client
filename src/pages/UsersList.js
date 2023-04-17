@@ -93,9 +93,11 @@ useEffect(() => {
             <p> Birthday : {thisUser.birthdate} </p>
             <p> Location: {thisUser.location}</p>
 
+            
+            
+            </Link>
             <button onClick={() => {addFollow(thisUser._id)}}>Follow</button>
             <hr></hr>
-            </Link>
             </div>
           );
         })}

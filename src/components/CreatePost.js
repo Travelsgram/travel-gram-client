@@ -18,16 +18,15 @@ function CreatePost(props){
 
     const handleCreatePostSubmit = (e) => {
         e.preventDefault();
-          
         const tagsArr = tags.split(" ");
     
         const uploadData = new FormData();
         uploadData.append("image", image);
     
-          service
-            .uploadImage(uploadData)
-            .then((response) => {
-              const data = {
+        service
+          .uploadImage(uploadData)
+          .then((response) => {
+            const data = {
               image: response.fileUrl,
               location: location,
               description: description,
@@ -49,8 +48,7 @@ function CreatePost(props){
                 navigate("/userprofile");
               })
               .catch((error) => console.log("error creating new post", error));
-              })
-            
+          })
           .catch((err) => console.log("Error while uploading the file: ", err));
       };
     
@@ -73,15 +71,19 @@ function CreatePost(props){
               type="text"
               name="location"
               value={location}
-              onChange={(e) => {setLocation(e.target.value)}}
+              onChange={(e) => {
+                setLocation(e.target.value);
+              }}
             />
     
-            <label>Description:</label>
+            <label>description:</label>
             <input
               type="text"
               name="description"
               value={description}
-              onChange={(e) => {setDescription(e.target.value)}}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
             />
     
             <label>Add Tags:</label>

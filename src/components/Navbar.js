@@ -72,7 +72,7 @@ function Navbar() {
       
       
        <Flex spacing={3} alignItems="center" >
-       <Avatar name={user && user.name} src={user.profileImg}/>
+       <Avatar name={user && user.name} />
        <Link to="/userprofile"> 
        <Text >{user && user.name}</Text>
       </Link>

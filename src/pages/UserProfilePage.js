@@ -113,7 +113,18 @@ function UserProfilePage(){
           )
         } 
     }}
+    const unfollowUser = (id) => {
 
+      axios
+        .get(
+          `${process.env.REACT_APP_API_URL}/api/users/follow/${id}`,
+          { headers: {Authorization: `Bearer ${storedToken}`}}
+        )
+        .then( response => {
+          getSiteUpdate();
+        })
+        .catch( error => console.log("error getting usersDetails", error))
+    }
 
 
     return(
@@ -134,6 +145,7 @@ function UserProfilePage(){
                   <p>follows: {follower.followers.length} people</p>
                   <p>posts:{follower.posts.length}</p>
                   <p>travelguides: {follower.travelguides.length}</p>
+                  <button onClick={()=>{unfollowUser(follower._id)}}>Unfollow</button>
                   <hr></hr>
                   <br></br>
               </div>
@@ -150,9 +162,9 @@ function UserProfilePage(){
             <div key={post._id}>
               <img src={post.image} alt="img" />
               <p>{post.location}</p>
-              <p>{post.comment}</p>
+              <p>{post.description}</p>
               <p>{post.tags.length}</p>
-              <button>❤️{post.likes.length}</button>
+              <p>❤️{post.likes.length}</p>
               <button onClick={()=>{deletePost(post._id)}}>delete my post</button>
             </div>
           )

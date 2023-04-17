@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function CreatePost(props){
     const [image, setImage] = useState("");
     const [location, setLocation] = useState("");
-    const [comment, setComment] = useState("");
+    const [description, setDescription] = useState("");
     const [tags, setTags] = useState("");
 
     const navigate = useNavigate()
@@ -21,7 +21,7 @@ function CreatePost(props){
         const data = {
             image: image,
             location: location,
-            comment: comment,
+            description: description,
             tags: tagsArr,
             user: id
         }
@@ -33,7 +33,7 @@ function CreatePost(props){
             .then( response => {
                 setImage("");
                 setLocation("");
-                setComment("");
+                setDescription("");
                 setTags("");
                 props.postCreate();
                 props.getSiteUpdate();
@@ -63,12 +63,12 @@ function CreatePost(props){
                         onChange={(e)=>{setLocation(e.target.value)}}
                     />
 
-                <label>Comment:</label>
+                <label>Description:</label>
                     <input
                         type="text" 
-                        name="comment"
-                        value={comment}
-                        onChange={(e)=>{setComment(e.target.value)}}
+                        name="description"
+                        value={description}
+                        onChange={(e)=>{setDescription(e.target.value)}}
                     />
 
                 <label>Add Tags:</label>

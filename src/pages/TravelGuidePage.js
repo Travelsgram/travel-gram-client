@@ -26,7 +26,9 @@ export default function TravelGuidePage() {
           {travelguide ? (
             travelguide.map((travel) => {
               return (
-                <div key={travel._id} className="Travel">
+                <div key={travel._id}>
+                <h3>userDetails</h3>
+                <p>{travel.user.name}{travel.user.location} <img src={travel.user.profileImg} alt="profilepic" />followers:{travel.user.followers.length}posts:{travel.user.posts.length}travelguides:{travel.user.travelguides.length}  </p>
                 <h2>{travel.title} </h2>
                   <img src={travel.image} alt={travel.image.name} />
                   

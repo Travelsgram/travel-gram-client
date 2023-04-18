@@ -8,6 +8,7 @@ import TravelGuidePage from './pages/TravelGuidePage';
 import UserProfilePage from "./pages/UserProfilePage";
 import TravelGuideDetails from './pages/TravelGuideDetails';
 import UserList from "./pages/UsersList";
+import Footer from './components/Footer';
 
 
 
@@ -23,11 +24,9 @@ function App() {
         <Route path="/userprofile" element={<UserProfilePage />} />
         <Route path="/travelguide/:travelguideId" element={<TravelGuideDetails />} />
         <Route path='/users' element={<UserList/>}/>
-
-        
-
-
       </Routes>
+
+    <Footer/>
     </div>
   );
 }

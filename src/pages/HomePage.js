@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
+import { Avatar, Box, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading,  Image, SimpleGrid, Text, Tag } from "@chakra-ui/react";
 
 
 function HomePage() {
@@ -122,39 +123,54 @@ function HomePage() {
         
       />
 
+
+
+      <SimpleGrid p={10} spacing={4} minChildWidth="220px">
+
       {posts ? 
         posts.map((post) => {
-          
           return (
-              <div key={post._id} className="Post">
-                <img src={post.image} alt={post.name} />
-                <p> Description : {post.description} </p>
-                <p>Location : {post.location} </p>
-                <p>{post.tags.join(" ")}</p>
-                <button onClick={()=>{addLike(post._id)}}>❤️{post.likes.length}</button>
-                <div>
 
-                <h2>Comments:</h2>
-                {post.comments && 
-                  post.comments.map( comment => {
-                    return(
-                      <div key={comment._id}>
-                        <p>{comment.text}</p>
-                        <p>{comment.date}</p>
-                        <p>{comment.user.name}</p>
-                        <button onClick={()=>{addLikeToComment(comment._id)}}>❤️{comment.likes.length}</button>
-                        {comment.user.id === user.id &&
-                          <button onClick={()=>{deleteMyComment(comment._id)}}>delete my comment</button>
-                        }
-                        
-                        <hr></hr>
-                      </div>
-                    )
-                  })
-                }
-                </div>
-                
-                <form onSubmit={(e)=>{newComment(e, post._id)}}>
+        <Card key={post._id} maxW='md' boxShadow='base' >
+
+          <CardHeader>
+            <Flex spacing='4'>
+              <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap' justify="space-between">
+                <Avatar name={post.user.name} src={post.user.profileImg}  />
+
+                <Box>
+                  <Heading size='sm'>{post.user.name}</Heading>
+                  <Text size="xs">{post.user.location}</Text>
+                </Box>
+              </Flex> 
+            </Flex>
+          </CardHeader>
+
+          <CardBody textAlign='left'>
+            <Text as='em' fontSize='xs'>{post.location}</Text>
+            <Box className="card-image">
+            <Image
+              objectFit='cover'
+              src={post.image}
+              alt={post.name}
+            />
+            </Box>
+            <Box py={2} h={{ base: "7vh", md: "14vh", lg: "12vh" }}>
+              <Text as='samp' lineHeight="1.5" fontSize="md">
+                {post.description}
+              </Text>
+            </Box>
+
+            <Box display="flex" justifyContent="space-between" flexDirection="row" alignItems="center">
+              <Button onClick={()=>{addLike(post._id)}} flex='1' variant='ghost' >
+                ❤️ {post.likes.length}
+              </Button>
+
+            </Box>
+
+
+            <Box >
+              <form  onSubmit={(e)=>{newComment(e, post._id)}}>
                     <input
                       type="text"
                       name="comment"
@@ -163,13 +179,65 @@ function HomePage() {
                       onChange={(e)=>{setComment(e.target.value)}}
                     />
                     <button type="submit">comment</button>
-                </form>
-            </div>
-          );
-        })
-       : 
+              </form>
+            </Box>
+
+            <Box overflow="scroll" height="30vh" >
+              {post.comments && 
+                  post.comments.map( comment => {
+                    return(
+                          <Card
+                            key={comment._id}
+                           
+                          >
+                          
+                          
+                          <Box display="flex" direction="row"  alignItems="center">
+                            <Avatar name={comment.user.name} src={comment.user.profileImg}  />
+
+                            <CardBody>
+                              <Text fontSize="sm" py='2'>
+                                "{comment.text}"
+                              </Text>
+                            </CardBody>
+                            <Box  display="flex" direction="column" justifyContent="space-between" >
+                              <button onClick={()=>{addLikeToComment(comment._id)}}>❤️ {comment.likes.length}</button>
+                                {comment.user.name === user.name &&
+                              <button onClick={()=>{deleteMyComment(comment._id)}}>🗑</button>
+                                }
+                            </Box>  
+                          </Box>
+                        </Card>
+                    )
+                  })
+              }
+            </Box>
+            <Text fontSize="xs"  flex='1' variant='ghost' >
+                {post.comments.length} comments
+            </Text >
+          </CardBody>
+
+
+          <CardFooter>
+          <Box overflow="scroll" display="flex" justify="flex-start" 
+          >{post.tags.map( tag => {
+            return (
+              <Box mx="1">
+                  <Tag>#{tag}</Tag>
+              </Box>
+            )
+          })}</Box>
+
+
+          </CardFooter>
+        </Card>
+        );
+      })
+      : 
         <p> Loading posts...</p>
       }
+      </SimpleGrid>
+
     </div>
   );
 }

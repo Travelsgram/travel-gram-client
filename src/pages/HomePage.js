@@ -224,7 +224,7 @@ function HomePage() {
             </Box>
             <Text fontSize="xs"  flex='1' variant='ghost' >
                 {post.comments.length} comments
-            </Text >
+            </Text>
           </CardBody>
 
 

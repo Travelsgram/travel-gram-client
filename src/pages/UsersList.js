@@ -3,6 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
 import UserDetails from "../components/UserDetails";
+import { Button, Card, Image, Input, Flex, CardBody, CardFooter, Heading, Text, SimpleGrid } from "@chakra-ui/react";
 
 
 export default function UserProfile() {
@@ -69,39 +70,57 @@ useEffect(() => {
 
   return (
     <div>
+
       {!userDetails && 
         <div>
-      <h1>all Users</h1>
+      
 
-      <input
+      <Input  
+       my="5vh"
+        width="50vw"
         type="text"
         placeholder="Search User"
         value={search}
-        onChange={(e)=>{getSearch(e)}}
-      />
+        onChange={(e)=>{getSearch(e)}} />
 
+
+      
+ 
       {users ? 
       
-      <div>
+        <SimpleGrid p={5} spacing={4} minChildWidth="200px">
         {users.map((thisUser) => {
           return (
-            <div key={thisUser._id} className="User">
-            <Link onClick={()=>{renderUserDetails(thisUser._id)}}>
-            <p> Name: {thisUser.name}</p>
-            <p> Email: {thisUser.email}</p>
-            <img src={thisUser.profileImg} alt={thisUser.name} />
-            <p> Birthday : {thisUser.birthdate} </p>
-            <p> Location: {thisUser.location}</p>
+
+            <Card key={thisUser._id} className="User"  maxWidth='250px'  > 
+            <Flex spacing='10' >  
+            <Flex flex='1' gap='10' alignItems='center' flexWrap='wrap' justify="space-between" flexDirection='row'>
 
             
+            <Link onClick={()=>{renderUserDetails(thisUser._id)}}>
+
+          
+            <CardBody display='relative' > 
+            <Image borderRadius='full' objectFit='cover' fallbackSrc='https://via.placeholder.com/200' src={thisUser.profileImg} alt={thisUser.name}  />
+            <Heading size="sm" p={5}> User name: {thisUser.name}</Heading>
+    
             
+            <Text> Birthday : {thisUser.birthdate} </Text>
+            <Text> Location: {thisUser.location}</Text>
+            </CardBody>
             </Link>
-            <button onClick={() => {addFollow(thisUser._id)}}>Follow</button>
-            <hr></hr>
-            </div>
+            </Flex>
+            </Flex>
+            <CardFooter>  
+            <Button onClick={() => {addFollow(thisUser._id)}} flex='1' > + Follow</Button>
+            </CardFooter>
+            
+            </Card>
           );
         })}
-        </div>
+        </SimpleGrid> 
+        
+       
       
 
        : 
@@ -111,7 +130,9 @@ useEffect(() => {
       }
 
       {userDetails && <UserDetails userDetId={userDetId} renderUserDetails={renderUserDetails} />}
+    
+      
     </div>
     
-  );
+);
 }

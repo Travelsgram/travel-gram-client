@@ -117,6 +117,7 @@ function HomePage() {
     
 
       <Input
+        my="2vh"
         width="80vw"
         type="text"
         value={search}
@@ -133,7 +134,7 @@ function HomePage() {
         posts.map((post) => {
           return (
 
-        <Card key={post._id} maxW='md' boxShadow='base' >
+        <Card key={post._id} maxW='sm'>
 
           <CardHeader>
             <Flex spacing='4'>
@@ -188,11 +189,6 @@ function HomePage() {
                     </>
                   )}
               </Menu>
-
-            </Box>
-
-
-            <Box >
 
             </Box>
 

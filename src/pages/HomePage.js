@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
-import { Avatar, Box, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading,  Image, SimpleGrid, Text, Tag } from "@chakra-ui/react";
+import { Avatar, Box, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading,  Image, SimpleGrid, Text, Tag, Menu, MenuButton, MenuList, MenuItem, Input } from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 
 function HomePage() {
@@ -113,9 +114,10 @@ function HomePage() {
 
   return (
     <div>
-      <h1>Posts</h1>
+    
 
-      <input
+      <Input
+        width="80vw"
         type="text"
         value={search}
         placeholder="Search for tags"
@@ -125,7 +127,7 @@ function HomePage() {
 
 
 
-      <SimpleGrid p={10} spacing={4} minChildWidth="220px">
+      <SimpleGrid p={10} spacing={4} minChildWidth="250px">
 
       {posts ? 
         posts.map((post) => {
@@ -155,7 +157,7 @@ function HomePage() {
               alt={post.name}
             />
             </Box>
-            <Box py={2} h={{ base: "7vh", md: "14vh", lg: "12vh" }}>
+            <Box py={2} overflow="scroll" h={{ base: "7vh", md: "14vh", lg: "12vh" }}>
               <Text as='samp' lineHeight="1.5" fontSize="md">
                 {post.description}
               </Text>
@@ -165,24 +167,36 @@ function HomePage() {
               <Button onClick={()=>{addLike(post._id)}} flex='1' variant='ghost' >
                 ❤️ {post.likes.length}
               </Button>
+              <Menu>
+                  {({ isOpen }) => (
+                    <>
+                      <MenuButton isActive={isOpen} as={Button} rightIcon={<ChevronDownIcon />}>
+                        {isOpen ? 'Close' : 'Open'}
+                      </MenuButton>
+                      <MenuList>
+                        <form  onSubmit={(e)=>{newComment(e, post._id)}}>
+                          <input
+                            type="text"
+                            name="comment"
+                            placeholder="comment this post"
+                            value={comment}
+                            onChange={(e)=>{setComment(e.target.value)}}
+                          />
+                          <button type="submit">comment</button>
+                        </form>
+                      </MenuList>
+                    </>
+                  )}
+              </Menu>
 
             </Box>
 
 
             <Box >
-              <form  onSubmit={(e)=>{newComment(e, post._id)}}>
-                    <input
-                      type="text"
-                      name="comment"
-                      placeholder="comment this post"
-                      value={comment}
-                      onChange={(e)=>{setComment(e.target.value)}}
-                    />
-                    <button type="submit">comment</button>
-              </form>
+
             </Box>
 
-            <Box overflow="scroll" height="30vh" >
+            <Box overflow="scroll" height="20vh" >
               {post.comments && 
                   post.comments.map( comment => {
                     return(

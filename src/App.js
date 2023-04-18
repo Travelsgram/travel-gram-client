@@ -26,7 +26,7 @@ function App() {
         <Route path='/users' element={<UserList/>}/>
       </Routes>
 
-    <Footer/>
+      <Footer/>
     </div>
   );
 }

@@ -11,7 +11,8 @@ const [users, setUsers] = useState(null);
 const [getUpdate, setGetUpdate] = useState(true);
 const [search, setSearch] = useState("");
 const [userDetails, setUserDetails] = useState(false);
-const [userDetId, setUserDetId] = useState("")
+const [userDetId, setUserDetId] = useState("");
+const [followingUsers, setFollowingUsers] = useState([]);
 
 const {storedToken} = useContext(AuthContext);
 
@@ -45,6 +46,7 @@ useEffect(() => {
         { headers: {Authorization: `Bearer ${storedToken}`}}
         )
       .then(response =>{
+        setFollowingUsers([...followingUsers, followId]);
         getSiteUpdate();
       })
       .catch((err) => console.log("error getting user from API", err))
@@ -58,6 +60,8 @@ useEffect(() => {
     getSiteUpdate();
   }
   const renderUserDetails = (id) => {
+    const isFollowing = followingUsers.includes(id);
+
     if(userDetails){
       setUserDetails(false);
       setUserDetails(false);
@@ -65,6 +69,7 @@ useEffect(() => {
       setUserDetId(id);
       setUserDetails(true);
     }
+    setFollowingUsers(isFollowing ? "Following" : "Follow");
   }
 
 
@@ -112,7 +117,7 @@ useEffect(() => {
             </Flex>
             </Flex>
             <CardFooter>  
-            <Button onClick={() => {addFollow(thisUser._id)}} flex='1' > + Follow</Button>
+            <Button onClick={() => {addFollow(thisUser._id)}} flex='1'  >{followingUsers.includes(thisUser._id) ? "Following" : "Follow"}</Button>
             </CardFooter>
             
             </Card>

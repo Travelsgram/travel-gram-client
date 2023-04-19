@@ -15,6 +15,14 @@ const [followingUsers, setFollowingUsers] = useState([]);
 
 const {storedToken} = useContext(AuthContext);
 
+
+
+function getDate(dateString) {
+  var birthDate = new Date();
+  var formattedDate = birthDate.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'});
+  return formattedDate;
+}
+
 useEffect(() => {
   
     axios
@@ -100,7 +108,7 @@ useEffect(() => {
             <Heading size="sm" p={5}> User name: {thisUser.name}</Heading>
     
             
-            <Text> Birthday : {thisUser.birthdate} </Text>
+            <Text> Birthday : {getDate(thisUser.birthdate)} </Text>
             <Text> Location: {thisUser.location}</Text>
             </CardBody>
             </Link>

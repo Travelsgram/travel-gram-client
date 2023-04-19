@@ -23,7 +23,8 @@ export default function TravelGuidePage() {
     
       return (
         <Box my={10}>
-          <h1>Travel Guide</h1>
+        <Heading >Travel Guide </Heading>
+        
 
         <Box display="flex" flexDirection="column" alignItems="center" >
         

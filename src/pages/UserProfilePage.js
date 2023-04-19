@@ -172,6 +172,7 @@ function UserProfilePage(){
             display="flex"
             flexDirection="column"
             alignItems="center"
+            my={{base:"15px", lg:"3px"}}
           >
 
           {curUser && infoRender()}
@@ -405,7 +406,7 @@ function UserProfilePage(){
 
         {createPostForm && <CreatePost postCreate={postCreate} getSiteUpdate={getSiteUpdate} />}
 
-        {createTravelguideForm && <CreateTravelguide errorMessage={errorMessage} travelguideCreate={travelguideCreate} getSiteUpdate={getSiteUpdate} />}
+        {createTravelguideForm && <CreateTravelguide travelguideCreate={travelguideCreate} getSiteUpdate={getSiteUpdate} />}
       </>
     )
 }

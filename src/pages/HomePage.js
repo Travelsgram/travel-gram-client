@@ -117,7 +117,7 @@ function HomePage() {
     
 
       <Input
-        my="2vh"
+        my={{base:"15px", lg:"5px"}}
         width="80vw"
         type="text"
         value={search}

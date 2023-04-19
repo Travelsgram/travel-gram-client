@@ -109,9 +109,19 @@ function CreateTravelguide(props){
                             value={title}
                             onChange={(e)=>{setTitle(e.target.value)}}
                         />
+                            <Textarea 
+                            placeholder="Explain your travel"
+                            my={1}
+                            errorBorderColor="rew.300"
+                            name="description"
+                            cols="30"
+                            rows="5"
+                            value={description}
+                            onChange={(e)=>{setDescription(e.target.value)}}
+                        />
 
                         <Textarea 
-                            placeholder="activities"
+                            placeholder="Add your activities that you made"
                             my={1}
                             errorBorderColor="rew.300"
                             name="activities"
@@ -122,7 +132,7 @@ function CreateTravelguide(props){
                         />
 
                         <Textarea 
-                            placeholder="tips"
+                            placeholder="Add some tips for your friends"
                             my={1}
                             errorBorderColor="rew.300"
                             name="tips"
@@ -132,17 +142,7 @@ function CreateTravelguide(props){
                             onChange={(e)=>{setTips(e.target.value)}}
                         />
 
-                        <Textarea 
-                            placeholder="description"
-                            my={1}
-                            errorBorderColor="rew.300"
-                            name="description"
-                            cols="30"
-                            rows="5"
-                            value={description}
-                            onChange={(e)=>{setDescription(e.target.value)}}
-                        />
-
+                        
                         { errorMessage && <p className="error-message">{errorMessage}</p> }
                         
                         <Box type="submit" display="flex" flexDirection="column" alignItems="center" >

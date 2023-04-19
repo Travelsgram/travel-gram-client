@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { AuthContext } from "../context/auth.context";
-import {Flex, Button, IconButton} from '@chakra-ui/react'
+import {Flex, Button, IconButton, Image} from '@chakra-ui/react'
 import {HamburgerIcon, CloseIcon} from '@chakra-ui/icons'
 import { Text } from "@chakra-ui/react";
 import { Avatar } from "@chakra-ui/avatar";
+import logo from "../images/logo.png";
+
 
  
 function Navbar() {
@@ -22,15 +24,11 @@ function Navbar() {
  
 
   return (
-    <Flex justify="center" alignItems="center">
-     <Flex pos="relative" top="1rem" right="1rem" align="center">
+    <Flex justify="center" alignItems="center" bg="gray.100">
+     <Flex align="center">
+     <Link to="/"> <Image src={logo}  /> </Link>
 
       <Flex display={['none','none' , 'flex' , 'flex']} >
-
-
-      <Link to="/">
-        <Button as="a" variant="ghost" arial-label="Home" my={5} w="100%">Home</Button>
-      </Link>
 
       <Link to="/travelguide"> 
       <Button as="a" variant="ghost" arial-label="Home" my={5} w="100%"> Travel Guide</Button>

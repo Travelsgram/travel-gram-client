@@ -32,9 +32,9 @@ import { faBell, faCalendarCheck, faMapMarkerAlt } from '@fortawesome/free-solid
       my={10}
     
     >
-
+<Divider />
      <Heading my={5}>{oneTravel.title} Details </Heading>
-
+     <Divider />
       <Image
         src={oneTravel.image}
         alt="Travel image"
@@ -49,17 +49,16 @@ import { faBell, faCalendarCheck, faMapMarkerAlt } from '@fortawesome/free-solid
         alignItems="center"
       >
 
-         <Divider />
-        <Text fontSize="md" fontWeight="bold" color="gray.600">
+        <Stack direction="row" alignItems="center">
+        <Text fontSize="lg">
           {oneTravel.description}
         </Text>
-        <Divider />
+        </Stack>
+        
         <Stack direction="row" alignItems="center">
-          <Box  fontSize="lg" color="green.500" />
           <FontAwesomeIcon icon={faMapMarkerAlt} />
           <Text fontSize="lg"> Location : {oneTravel.location}
           </Text>
-         
         </Stack>
 
        <Stack direction="row" alignItems="center"> 

@@ -47,7 +47,7 @@ export default function TravelGuidePage() {
                   />
 
                   <Stack width="70%">
-                    <CardBody>
+                    <CardBody m={15}>
                       <Heading size='md'>{travel.title}</Heading>
 
                       <Text py='2'>
@@ -63,7 +63,8 @@ export default function TravelGuidePage() {
                     </Link>
                     </CardFooter>
                   </Stack>
-                  <Box display="flex" flexDir="column" alignItems="center">
+
+                  <Box display="flex" flexDir="column" alignItems="center" m={5}>
                   <Link to={"/users/"+travel.user._id} >
                     <Image
                       boxSize='50px'

@@ -3,6 +3,7 @@ import UserEdit from "../components/UserEdit";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
+import service from "../api/service";
 
 function UserProfileEdit(props){
     const {storedToken, user} = useContext(AuthContext);
@@ -19,7 +20,7 @@ function UserProfileEdit(props){
     
     const [name, setName] = useState(def.name);
     const [email, setEmail] = useState(def.email);
-    const [profileImg, setProfileImg] = useState(def.profileImg);
+    const [image, setImage] = useState("");
     const [location, setLocation] = useState(def.location);
 
     const naviate = useNavigate()
@@ -27,25 +28,39 @@ function UserProfileEdit(props){
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
 
-        const data ={ name, email, profileImg, location }
+        const uploadData = new FormData();
+        uploadData.append("image", image);
 
-        axios
-            .put(
-                `${process.env.REACT_APP_API_URL}/api/users/${user._id}`,
-                data,
-                { headers: {Authorization: `Bearer ${storedToken}`}})
-            .then( response => {
-                
-                
-                naviate("/userprofile");
-                props.profileUpdate();
-                props.getSiteUpdate();
+        service
+            .uploadImage(uploadData)
+            .then( (response) => {
+                const data ={ name, email, profileImg:response.fileUrl, location }
+
+                axios
+                    .put(
+                        `${process.env.REACT_APP_API_URL}/api/users/${user._id}`,
+                        data,
+                        { headers: {Authorization: `Bearer ${storedToken}`}})
+                    .then( response => {
+                        naviate("/userprofile");
+                        props.profileUpdate();
+                        props.getSiteUpdate();
+                    })
+                    .catch( error => {
+                        const errorDescription = error.response.data.message;
+                        setErrorMessage(errorDescription);
+                    })        
             })
-            .catch( error => {
+            .catch(error => {
                 const errorDescription = error.response.data.message;
                 setErrorMessage(errorDescription);
-            })
+            })      
     }
+
+    const handleFileUpload = (e) => {
+        setImage(e.target.files[0]);
+    };
+
 
     return(
         <>
@@ -54,13 +69,13 @@ function UserProfileEdit(props){
                 setName={setName}
                 email={email}
                 setEmail={setEmail}
-                profileImg={profileImg}
-                setProfileImg={setProfileImg}
+                image={image}
+                setImage={setImage}
                 location={location}
                 setLocation={setLocation}
                 handleUpdateSubmit={handleUpdateSubmit}
                 errorMessage={errorMessage}
-                
+                handleFileUpload={handleFileUpload}
             />
         </>
     )

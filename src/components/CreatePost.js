@@ -37,9 +37,9 @@ function CreatePost(props){
             };
     
             axios
-              .post(`${process.env.REACT_APP_API_URL}/api/posts`, data, {
-                headers: { Authorization: `Bearer ${storedToken}` },
-              })
+              .post(`${process.env.REACT_APP_API_URL}/api/posts`,
+               data, 
+               { headers: { Authorization: `Bearer ${storedToken}` }})
               .then((response) => {
                 setImage("");
                 setLocation("");

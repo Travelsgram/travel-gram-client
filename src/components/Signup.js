@@ -55,18 +55,17 @@ function Signup(props){
               />
 
               <label>ProfilePicture:</label>
-              <input 
+              <Input 
                 my={1}
                 errorBorderColor='red.300'
                 variant='filled'  
-                type="text"
-                name="profileImg"
-                value={props.profileImg}
-                onChange={(e)=>{props.setProfileImg(e.target.value)}}
+                type="file"
+                name="image"
+                onChange={(e)=>{props.handleFileUpload(e)}}
               />
 
               <label>Birthdate:</label>
-              <input
+              <Input
                 my={1}
                 errorBorderColor='red.300'
                 variant='filled'  
@@ -77,7 +76,7 @@ function Signup(props){
               />
  
               <label>Location:</label>
-              <input 
+              <Input 
                 type="text"
                 name="location"
                 value={props.location}

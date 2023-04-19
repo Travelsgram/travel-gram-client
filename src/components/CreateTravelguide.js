@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
+import service from "../api/service";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Heading, Input, Textarea } from "@chakra-ui/react";
 
@@ -20,41 +21,55 @@ function CreateTravelguide(props){
     const id = user._id
     const handleCreatePostSubmit = (e) => {
         e.preventDefault();
-        
-        const data = {
-            image: image,
-            location: location,
-            title: title,
-            activities: activities,
-            tips: tips,
-            description: description,
-            user: id
-        }
 
-        axios
-            .post(  `${process.env.REACT_APP_API_URL}/api/travelguide`,
-                    data,
-                    { headers: {Authorization: `Bearer ${storedToken}`}})
-            .then( response => {
-                setImage("");
-                setLocation("");
-                setTitle("");
-                setActivities("");
-                setTips("");
-                setDescription("");
+        const uploadData = new FormData();
+        uploadData.append("image", image);
 
-                props.travelguideCreate();
-                props.getSiteUpdate();
+        service
+            .uploadImage(uploadData)
+            .then( (response) => {
+                const data = {
+                    image: response.fileUrl,
+                    location: location,
+                    title: title,
+                    activities: activities,
+                    tips: tips,
+                    description: description,
+                    user: id
+                }
+
+                axios
+                    .post(  
+                        `${process.env.REACT_APP_API_URL}/api/travelguide`,
+                        data,
+                        { headers: {Authorization: `Bearer ${storedToken}`}})
+                    .then( response => {
+                        setImage("");
+                        setLocation("");
+                        setTitle("");
+                        setActivities("");
+                        setTips("");
+                        setDescription("");
+
+                        props.travelguideCreate();
+                        props.getSiteUpdate();
                 
-                navigate("/userprofile")
+                        navigate("/userprofile")
+                    })
+                    .catch( error => {
+                        const errorDescription = error.response.data.message;
+                        setErrorMessage(errorDescription);
+                    })
             })
             .catch(error => {
                 const errorDescription = error.response.data.message;
                 setErrorMessage(errorDescription);
-            })
+            });
+    };
 
-    }
-
+    const handleFileUpload = (e) => {
+        setImage(e.target.files[0]);
+    };
 
     return(
         <Box my={5} display="flex" flexDirection="column" alignItems="center">
@@ -68,10 +83,9 @@ function CreateTravelguide(props){
                             my={1}
                             errorBorderColor='red.300'
                             variant='filled'
-                            type="text"
+                            type="file"
                             name="image"
-                            value={image}
-                            onChange={(e)=>{setImage(e.target.value)}}
+                            onChange={(e)=>{handleFileUpload(e)}}
                         />
 
                         <label>Location:</label>

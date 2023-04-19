@@ -5,12 +5,13 @@ import Signup from "../components/Signup";
 import Login from "../components/Login";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import service from "../api/service";
 
 function AuthPage(props){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
-    const [profileImg, setProfileImg] = useState("");
+    const [image, setImage] = useState("");
     const [birthdate, setBirthdate] = useState("");
     const [location, setLocation] = useState("");
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -23,23 +24,36 @@ function AuthPage(props){
     const handleSignupSubmit = (e) => {
         e.preventDefault();
 
-        const req = { email, password, name, profileImg, birthdate, location };
+        const uploadData = new FormData();
+        uploadData.append("image", image);
 
-        axios
-            .post(`${process.env.REACT_APP_API_URL}/auth/signup`, req)
-            .then( response => {
-                setName("");
-                setProfileImg("");
-                setBirthdate("");
-                setLocation("");
-                setForm("Login")
+        service
+            .uploadImage(uploadData)
+            .then( (response) => {
+                const req = { email, password, name, profileImg:response.fileUrl, birthdate, location }
+
+                axios
+                    .post(`${process.env.REACT_APP_API_URL}/auth/signup`, req)
+                    .then( response => {
+                        setName("");
+                        setImage("");
+                        setBirthdate("");
+                        setLocation("");
+                        setForm("Login")
+                    })
+                    .catch( error => {
+                        const errorDescription = error.response.data.message;
+                        setErrorMessage(errorDescription);
+                    })
             })
-            .catch( error => {
+            .catch(error => {
                 const errorDescription = error.response.data.message;
                 setErrorMessage(errorDescription);
-            })
-
+            })      
     }
+    const handleFileUpload = (e) => {
+        setImage(e.target.files[0]);
+    };
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
@@ -79,14 +93,15 @@ function AuthPage(props){
             setPassword={setPassword}
             name={name}
             setName={setName}
-            profileImg={profileImg}
-            setProfileImg={setProfileImg}
+            profileImg={image}
+            setImage={setImage}
             birthdate={birthdate}
             setBirthdate={setBirthdate}
             location={location}
             setLocation={setLocation}
             errorMessage={errorMessage}
             toggleForm={toggleForm}
+            handleFileUpload={handleFileUpload}
             />
         }
         {form === "Login" &&

@@ -37,10 +37,9 @@ function UserEdit(props){
               my={1}
               errorBorderColor='red.300'
               variant='filled'
-              type="text"
-              name="profileImg"
-              value={props.profileImg}
-              onChange={(e)=>{props.setProfileImg(e.target.value)}}
+              type="file"
+              name="image"
+              onChange={(e)=>{props.handleFileUpload(e)}}
             />
 
             <label>Location:</label>

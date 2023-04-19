@@ -10,6 +10,7 @@ import { Grid, GridItem, Box, Button, Card, CardBody, CardFooter, Image, Text, A
 import { DeleteIcon } from '@chakra-ui/icons';
 
 function UserProfilePage(){
+    const [errorMessage, setErrorMessage] = useState(undefined);
     const [curUser, setCurUser] = useState(null);
     const [updateForm, setUpdateForm] = useState(false);
     const [profileInfo, setProfileInfo] = useState(true);
@@ -28,7 +29,10 @@ function UserProfilePage(){
         .then( response => {
             setCurUser(response.data)
         })
-        .catch( error => console.log("error getting usersDetails", error))
+        .catch( error => {
+          const errorDescription = error.response.data.message;
+          setErrorMessage(errorDescription);
+      })
     }, [getUpdate])
 
     const deleteProfile = () => {
@@ -38,7 +42,10 @@ function UserProfilePage(){
         .then( response => {
           logOutUser()
         })
-        .catch( error => console.log("error deleting userprofile", error))
+        .catch( error => {
+          const errorDescription = error.response.data.message;
+          setErrorMessage(errorDescription);
+      })
 
     }
     const profileUpdate = () => {
@@ -69,7 +76,10 @@ function UserProfilePage(){
           .then( response => {
             getSiteUpdate()
           })
-          .catch( error => console.log("error deleting post", error))
+          .catch( error => {
+            const errorDescription = error.response.data.message;
+            setErrorMessage(errorDescription);
+        })
     }
     const travelguideCreate = () => {
       if(createTravelguideForm){
@@ -90,7 +100,10 @@ function UserProfilePage(){
         .then( response => {
           getSiteUpdate()
         })
-        .catch( error => console.log("error deleting travelguide", error))
+        .catch( error => {
+          const errorDescription = error.response.data.message;
+          setErrorMessage(errorDescription);
+      })
     }
     const getSiteUpdate = () => {
       getUpdate ? setGetUpdate(false) : setGetUpdate(true)
@@ -134,7 +147,10 @@ function UserProfilePage(){
         .then( response => {
           getSiteUpdate();
         })
-        .catch( error => console.log("error getting usersDetails", error))
+        .catch( error => {
+          const errorDescription = error.response.data.message;
+          setErrorMessage(errorDescription);
+      })
     }
     const renderPosts = () => {
       setShowPosts(true)
@@ -145,7 +161,8 @@ function UserProfilePage(){
 
 
     return(
-      <>
+      <> {profileInfo &&
+
         <Grid templateColumns="repeat(6, 1fr)" >
 
           <GridItem
@@ -176,7 +193,7 @@ function UserProfilePage(){
           {showPosts && 
             <Box boxShadow="lg" minHeight="80vh" my={5}>
             <SimpleGrid spacing={2} columns={[2, null, 3]}>
-              {curUser && profileInfo &&
+              {curUser &&
                 
                   curUser.posts.map(post => {
                     return(
@@ -272,7 +289,7 @@ function UserProfilePage(){
           {!showPosts && 
             <Box boxShadow="lg" minHeight="80vh" my={5}>
             <SimpleGrid spacing={2} columns={[2, null, 3]}>
-              {curUser && profileInfo &&
+              {curUser && 
        
                 curUser.travelguides.map(travelguide => {
                   return(
@@ -329,7 +346,7 @@ function UserProfilePage(){
 
           >
             
-            {curUser && profileInfo &&
+            {curUser && 
               
                 
                 curUser.followers.map(follower => {
@@ -376,19 +393,19 @@ function UserProfilePage(){
 
           </GridItem>
 
+          
         </Grid>
-
-
+      }
 
 
         
 
 
-        {updateForm && <UserProfileEdit profileUpdate={profileUpdate} curUser={curUser} getSiteUpdate={getSiteUpdate}  />}
+        {updateForm && <UserProfileEdit  profileUpdate={profileUpdate} curUser={curUser} getSiteUpdate={getSiteUpdate}  />}
 
         {createPostForm && <CreatePost postCreate={postCreate} getSiteUpdate={getSiteUpdate} />}
 
-        {createTravelguideForm && <CreateTravelguide travelguideCreate={travelguideCreate} getSiteUpdate={getSiteUpdate} />}
+        {createTravelguideForm && <CreateTravelguide errorMessage={errorMessage} travelguideCreate={travelguideCreate} getSiteUpdate={getSiteUpdate} />}
       </>
     )
 }

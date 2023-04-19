@@ -3,9 +3,11 @@ import { AuthContext } from "../context/auth.context";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import service from "../api/service";
+import { Box, Button, Heading, Input } from "@chakra-ui/react";
 
 
 function CreatePost(props){
+    const [errorMessage, setErrorMessage] = useState(undefined);
     const [image, setImage] = useState("");
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
@@ -47,9 +49,15 @@ function CreatePost(props){
                 props.getSiteUpdate();
                 navigate("/userprofile");
               })
-              .catch((error) => console.log("error creating new post", error));
+              .catch(error => {
+                const errorDescription = error.response.data.message;
+                setErrorMessage(errorDescription);
+            });
           })
-          .catch((err) => console.log("Error while uploading the file: ", err));
+          .catch(error => {
+            const errorDescription = error.response.data.message;
+            setErrorMessage(errorDescription);
+        });
       };
     
       const handleFileUpload = (e) => {
@@ -57,17 +65,26 @@ function CreatePost(props){
       };
     
       return (
-        <>
+        <Box my={5} display="flex" flexDirection="column" alignItems="center">
+        <Box minH="70vh" width="80vw" boxShadow="dark-lg" borderRadius={10} display="flex" flexDirection="column" alignItems="center" >
+          <Heading my={3}>Create a new Post</Heading>
+          <Box width="60%" my={5} >
           <form onSubmit={handleCreatePostSubmit}>
             <label>Image:</label>
-            <input
+            <Input
+              my={1}
+              errorBorderColor='red.300'
+              variant='filled'
               type="file"
               name="image"
               onChange={(e) => handleFileUpload(e)}
             />
     
             <label>Location:</label>
-            <input
+            <Input
+              my={1}
+              errorBorderColor='red.300'
+              variant='filled'            
               type="text"
               name="location"
               value={location}
@@ -77,7 +94,10 @@ function CreatePost(props){
             />
     
             <label>description:</label>
-            <input
+            <Input
+              my={1}
+              errorBorderColor='red.300'
+              variant='filled'
               type="text"
               name="description"
               value={description}
@@ -87,7 +107,10 @@ function CreatePost(props){
             />
     
             <label>Add Tags:</label>
-            <input
+            <Input
+              my={1}
+              errorBorderColor='red.300'
+              variant='filled'
               type="text"
               name="tags"
               value={tags}
@@ -95,10 +118,23 @@ function CreatePost(props){
                 setTags(e.target.value);
               }}
             />
-    
-            <button type="submit">Create new Post</button>
+
+            { errorMessage && <p className="error-message">{errorMessage}</p> }
+
+            <Box display="flex" flexDirection="column" alignItems="center" >
+              <Button my={3} type="submit" colorScheme='teal' size='sm'>
+                Create new Post
+              </Button>
+
+              
+            </Box>
           </form>
-        </>
+          <Button my={3} colorScheme='red' size='xs' onClick={props.postCreate}>
+                back to profile
+          </Button>
+          </Box>
+        </Box>
+        </Box>
       );
     }
     

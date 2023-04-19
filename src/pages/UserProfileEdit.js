@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function UserProfileEdit(props){
     const {storedToken, user} = useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = useState(undefined);
 
    
     
@@ -40,7 +41,10 @@ function UserProfileEdit(props){
                 props.profileUpdate();
                 props.getSiteUpdate();
             })
-            .catch( error => console.log("error updating user profile", error))
+            .catch( error => {
+                const errorDescription = error.response.data.message;
+                setErrorMessage(errorDescription);
+            })
     }
 
     return(
@@ -55,6 +59,7 @@ function UserProfileEdit(props){
                 location={location}
                 setLocation={setLocation}
                 handleUpdateSubmit={handleUpdateSubmit}
+                errorMessage={errorMessage}
                 
             />
         </>

@@ -6,7 +6,7 @@ import { Card, CardBody, CardFooter, Heading, Image, Box, Stack, Text, Button } 
 
 
 export default function TravelGuidePage() {
-    const [travelguide, setTravelGuide] = useState([]);
+    const [travelguide, setTravelGuide] = useState(null);
     
     const {storedToken} = useContext(AuthContext);
     useEffect(() => {

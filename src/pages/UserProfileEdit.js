@@ -8,6 +8,8 @@ import service from "../api/service";
 function UserProfileEdit(props){
     const {storedToken, user} = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState(undefined);
+    
+    const { setUser } = useContext(AuthContext)
 
    
     
@@ -42,6 +44,7 @@ function UserProfileEdit(props){
                         data,
                         { headers: {Authorization: `Bearer ${storedToken}`}})
                     .then( response => {
+                        setUser(response.data)
                         naviate("/userprofile");
                         props.profileUpdate();
                         props.getSiteUpdate();
@@ -76,6 +79,7 @@ function UserProfileEdit(props){
                 handleUpdateSubmit={handleUpdateSubmit}
                 errorMessage={errorMessage}
                 handleFileUpload={handleFileUpload}
+                profileUpdate={props.profileUpdate}
             />
         </>
     )

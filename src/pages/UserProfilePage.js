@@ -23,6 +23,7 @@ function UserProfilePage(){
     
 
     useEffect( () => {
+      user &&
       axios
         .get(`${process.env.REACT_APP_API_URL}/api/users/${user._id}`,
         { headers: {Authorization: `Bearer ${storedToken}`}})
@@ -36,6 +37,7 @@ function UserProfilePage(){
     }, [getUpdate])
 
     const deleteProfile = () => {
+      user &&
       axios
         .delete(`${process.env.REACT_APP_API_URL}/api/users/${user._id}`,
         { headers: {Authorization: `Bearer ${storedToken}`}})

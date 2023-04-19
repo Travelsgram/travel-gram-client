@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
-import UserDetails from "../components/UserDetails";
 import { Button, Card, Image, Input, Flex, CardBody, CardFooter, Heading, Text, SimpleGrid } from "@chakra-ui/react";
 
 
@@ -16,15 +15,6 @@ const [userDetId, setUserDetId] = useState("")
 const {storedToken} = useContext(AuthContext);
 
 useEffect(() => {
-  
-  //*******************search query
-   /* axios
-    .get(`${process.env.REACT_APP_API_URL}/api/users?user=${search}`,
-    { headers: {Authorization: `Bearer ${storedToken}`}})
-    .then((response) => {
-      setUsers(response.data);
-    })
-    .catch((err) => console.log("error getting user from API", err)); */
   
     axios
     .get(`${process.env.REACT_APP_API_URL}/api/users`,
@@ -129,7 +119,7 @@ useEffect(() => {
     </div>
       }
 
-      {userDetails && <UserDetails userDetId={userDetId} renderUserDetails={renderUserDetails} />}
+     
     
       
     </div>

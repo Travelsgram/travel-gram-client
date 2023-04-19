@@ -1,7 +1,7 @@
 import { Box, Button, Heading, Input } from "@chakra-ui/react";
 
 function UserEdit(props){
-
+  
 
   return(
     <Box my={5} display="flex" flexDirection="column" alignItems="center">
@@ -60,7 +60,7 @@ function UserEdit(props){
             </Box>
 
           </form>
-          <Button my={3} colorScheme='red' size='xs' onClick={props.postCreate}>
+          <Button my={3} colorScheme='red' size='xs' onClick={props.profileUpdate}>
             back to profile
           </Button>
 

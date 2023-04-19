@@ -14,17 +14,6 @@ function HomePage() {
   
   const {storedToken, user} = useContext(AuthContext)
   useEffect(() => {
-  
-    /*axios
-    .get(
-      `${process.env.REACT_APP_API_URL}/api/posts?search=${search}`,
-      { headers: {Authorization: `Bearer ${storedToken}`}})
-    .then((response) => {
-      setPosts(response.data);
-    
-    })
-    .catch((err) => console.log("error getting posts from API", err)) */
-  
     axios
     .get(
       `${process.env.REACT_APP_API_URL}/api/posts`,
@@ -151,13 +140,24 @@ function HomePage() {
 
           <CardBody textAlign='left'>
             <Text as='em' fontSize='xs'>{post.location}</Text>
-            <Box className="card-image">
-            <Image
-              objectFit='cover'
-              src={post.image}
-              alt={post.name}
-            />
+            {!user &&
+              <Box className="card-image" filter='auto' blur='8px'>
+                <Image
+                objectFit='cover'
+                src={post.image}
+                alt={post.name}
+              />
             </Box>
+            }
+            {user &&
+              <Box className="card-image">
+                <Image
+                objectFit='cover'
+                src={post.image}
+                alt={post.name}
+              />
+            </Box>
+            }
             <Box py={2} overflow="scroll" h={{ base: "7vh", md: "14vh", lg: "12vh" }}>
               <Text as='samp' lineHeight="1.5" fontSize="md">
                 {post.description}
@@ -209,7 +209,7 @@ function HomePage() {
                             </CardBody>
                             <Box  display="flex" direction="column" justifyContent="space-between" >
                               <button onClick={()=>{addLikeToComment(comment._id)}}>❤️ {comment.likes.length}</button>
-                                {comment.user.name === user.name &&
+                                {user && comment.user._id === user._id &&
                               <button onClick={()=>{deleteMyComment(comment._id)}}>🗑</button>
                                 }
                             </Box>  

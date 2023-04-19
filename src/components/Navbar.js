@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import {Flex, Button, IconButton, Image} from '@chakra-ui/react'
 import {HamburgerIcon, CloseIcon} from '@chakra-ui/icons'
-import { Text } from "@chakra-ui/react";
+
 import { Avatar } from "@chakra-ui/avatar";
 import logo from "../images/logo.png";
 

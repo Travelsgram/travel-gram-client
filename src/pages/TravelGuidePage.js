@@ -3,6 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
 import { Card, CardBody, CardFooter, Heading, Image, Box, Stack, Text, Button } from "@chakra-ui/react";
+import { PacmanLoader } from "react-spinners";
 
 
 export default function TravelGuidePage() {
@@ -92,10 +93,14 @@ export default function TravelGuidePage() {
                 
               );
             })
-          ) : (
-            <p> Loading posts...</p>
-          
-          )}  
+          ) : 
+          <Box minH="70vh" display="flex" justifyContent="center" alignItems="center" >
+            <PacmanLoader
+              color="#f9e700"
+              size={60}
+            />
+          </Box>
+          }  
           </Box>
 
 

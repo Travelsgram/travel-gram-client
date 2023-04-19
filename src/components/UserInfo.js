@@ -24,7 +24,7 @@ function UserInfo(props){
             <Image
                 my={7}
                 boxSize={{base: "250px", md: "250px", xl:"150px"}}
-                borderRadius='full'
+                borderRadius='50%'
                 objectFit='cover'
                 src={props.image}
                 alt="couldn`t load image"

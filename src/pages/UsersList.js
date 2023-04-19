@@ -79,7 +79,7 @@ useEffect(() => {
       
 
       <Input  
-       my="5vh"
+        my="5vh"
         width="50vw"
         type="text"
         placeholder="Search User"
@@ -132,7 +132,7 @@ useEffect(() => {
     </div>
       }
 
-     
+      
     
       
     </div>

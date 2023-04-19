@@ -7,6 +7,7 @@ import UserProfileEdit from "./UserProfileEdit";
 import UserInfo from "../components/UserInfo";
 import CreateTravelguide from "../components/CreateTravelguide";
 import { Grid, GridItem, Box, Button, Card, CardBody, CardFooter, Image, Text, Avatar, Tag, SimpleGrid, Heading } from "@chakra-ui/react";
+import { DeleteIcon } from '@chakra-ui/icons';
 
 function UserProfilePage(){
     const [curUser, setCurUser] = useState(null);
@@ -146,9 +147,10 @@ function UserProfilePage(){
     return(
       <>
         <Grid templateColumns="repeat(6, 1fr)" >
+
           <GridItem
             as="aside"
-            colSpan={{base: 6, md: 1.5, xl: 1}}
+            colSpan={{base: 6,  xl: 1}}
             minHeight="80vh"
             display="flex"
             flexDirection="column"
@@ -161,17 +163,18 @@ function UserProfilePage(){
 
           <GridItem
             as="main"
-            colSpan={{base: 6, md: 3, xl: 4}}
+            colSpan={{base: 6, xl: 4}}
             minHeight="80vh"
+            width="100%"
           >
-
+          
             <Box display="flex" flexDirection="row" justifyContent="space-between" >
                 <Button onClick={renderPosts}>Posts</Button>
                 <Button onClick={renderTravelguides}>Travelguides</Button>
             </Box>
 
           {showPosts && 
-          
+            <Box boxShadow="lg" minHeight="80vh" my={5}>
             <SimpleGrid spacing={2} columns={[2, null, 3]}>
               {curUser && profileInfo &&
                 
@@ -257,6 +260,7 @@ function UserProfilePage(){
               
               } 
               </SimpleGrid>
+              </Box>
           }
            
 
@@ -265,43 +269,72 @@ function UserProfilePage(){
         
         
 
+          {!showPosts && 
+            <Box boxShadow="lg" minHeight="80vh" my={5}>
+            <SimpleGrid spacing={2} columns={[2, null, 3]}>
+              {curUser && profileInfo &&
+       
+                curUser.travelguides.map(travelguide => {
+                  return(
+                    <Box boxShadow="base" display="flex" flexDirection="column"
+                    justifyContent="center" alignItems="center" key={travelguide._id}>
 
-        {curUser && profileInfo &&
-        <div>
-        <h2>travelguides</h2>
-        {curUser.travelguides.map(travelguide => {
-          return(
-            <div key={travelguide._id}>
-              <img src={travelguide.image} alt="img" />
-              <p>{travelguide.location}</p>
-              <p>{travelguide.comment}</p>
-              <button onClick={()=>{deleteTravelguide(travelguide._id)}}>delete my travelguide</button>
-            </div>
+                    <Image
+                      boxSize='200px'
+                      objectFit='cover'
+                      src={travelguide.image}
+                      alt="img"
+                      borderRadius="12px"
+                    />
+
+                    <Text as="b" >
+                      {travelguide.title}
+                    </Text>
+
+                    <Text fontSize='xs' as="em">
+                      {travelguide.location}
+                    </Text>
+                    
+              
+                    <Button
+                      leftIcon={<DeleteIcon />} 
+                      onClick={()=>{deleteTravelguide(travelguide._id)}}
+                      colorScheme='red' 
+                      size={{base:"lg", lg:"xs"}}>delete
+                    </Button>
+
+              
+            
+                    </Box>
+           
           )
-        })}
-        </div>
+        })
         }
+        </SimpleGrid>
+        </Box>
+          }
+
 
           </GridItem>
 
           <GridItem
             as="aside"
-            colSpan={{base: 6, md: 1.5, xl: 1}}
+            colSpan={{base: 6, xl: 1}}
             minHeight="40vh"
             maxH="90vh"
             display="flex"
-            flexDirection="column"
+            flexDirection={{base:"row", xl:"column"}}
             alignItems="center"
             overflow="scroll"
 
           >
-            <Heading as='h5' size='sm'>Friendslist</Heading>
+            
             {curUser && profileInfo &&
               
                 
                 curUser.followers.map(follower => {
                   return(
-                    <Box  borderRadius="10px" my={2} boxShadow='base' key={follower._id} display="flex" flexDirection="column" alignItems="center" >
+                    <Box   borderRadius="10px" my={2} boxShadow='base' key={follower._id} display="flex" flexDirection="column" alignItems="center" >
                       <Image
                         borderRadius='full'
                         boxSize='70px'
@@ -334,13 +367,8 @@ function UserProfilePage(){
                      <Box boxShadow='lg'>
                       <button  as="kbd" onClick={()=>{unfollowUser(follower._id)}}>Unfollow</button>
                      </Box>
-                      
                     </Box>
-                    
-                        
-                        
-                        
-                    
+                   
                   )
                 })
               

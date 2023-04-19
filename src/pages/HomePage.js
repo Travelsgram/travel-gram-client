@@ -196,10 +196,7 @@ function HomePage() {
               {post.comments && 
                   post.comments.map( comment => {
                     return(
-                          <Card
-                            key={comment._id}
-                           
-                          >
+                          <Card key={comment._id}>
                           
                           
                           <Box display="flex" direction="row"  alignItems="center">

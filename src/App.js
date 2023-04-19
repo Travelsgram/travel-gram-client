@@ -9,6 +9,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import TravelGuideDetails from './pages/TravelGuideDetails';
 import UserList from "./pages/UsersList";
 import Footer from './components/Footer';
+import UserDetailsPage from './pages/UserDetailsPage';
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/userprofile" element={<UserProfilePage />} />
         <Route path="/travelguide/:travelguideId" element={<TravelGuideDetails />} />
         <Route path='/users' element={<UserList/>}/>
+        <Route path="/users/:userId" element={<UserDetailsPage />}/>
       </Routes>
 
       <Footer/>

@@ -22,7 +22,7 @@ function UserEdit(props){
             />
 
             <label>Name:</label>
-            <input 
+            <Input 
               my={1}
               errorBorderColor='red.300'
               variant='filled'
@@ -33,7 +33,7 @@ function UserEdit(props){
             />
 
             <label>ProfilePicture:</label>
-            <input 
+            <Input 
               my={1}
               errorBorderColor='red.300'
               variant='filled'
@@ -43,7 +43,7 @@ function UserEdit(props){
             />
 
             <label>Location:</label>
-            <input 
+            <Input 
               type="text"
               name="location"
               value={props.location}

@@ -1,8 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
-import { Avatar, Box, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading,  Image, SimpleGrid, Text, Tag, Menu, MenuButton, MenuList, MenuItem, Input } from "@chakra-ui/react";
+import { Avatar, Box, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading,  Image, SimpleGrid, Text, Tag, Menu, MenuButton, MenuList, Input } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { PacmanLoader } from "react-spinners";
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 
 function HomePage() {
@@ -219,9 +222,15 @@ function HomePage() {
                   })
               }
             </Box>
-            <Text fontSize="xs"  flex='1' variant='ghost' >
+            <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center">
+              <Text fontSize="xs"  flex='1' variant='ghost' >
                 {post.comments.length} comments
-            </Text>
+              </Text>
+              <Text>
+                <Moment fromNow>{post.createdAt}</Moment>
+              </Text>
+            </Box>
+
           </CardBody>
 
 
@@ -241,7 +250,13 @@ function HomePage() {
         );
       })
       : 
-        <p> Loading posts...</p>
+      <Box minH="70vh" display="flex" justifyContent="center" alignItems="center" >
+        <PacmanLoader
+          color="#f9e700"
+          size={60}
+        />
+      </Box>
+      
       }
       </SimpleGrid>
 

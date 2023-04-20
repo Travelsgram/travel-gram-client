@@ -33,7 +33,7 @@ import { ThemeContext } from "../context/theme.context";
       display="flex"
       flexDirection="column"
       alignItems="center"
-      my={10}
+      
     
     >
 <Divider />

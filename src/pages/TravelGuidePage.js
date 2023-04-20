@@ -9,9 +9,8 @@ import { ThemeContext } from "../context/theme.context";
 
 export default function TravelGuidePage() {
     const [travelguide, setTravelGuide] = useState(null);
-    
     const {storedToken} = useContext(AuthContext);
-    const { bodyTheme } = useContext(ThemeContext)
+    const { bodyTheme, cardsTheme } = useContext(ThemeContext)
 
     useEffect(() => {
         axios
@@ -29,7 +28,7 @@ export default function TravelGuidePage() {
         <Heading py={4}>Travel Guide </Heading>
         
 
-        <Box display="flex" flexDirection="column" alignItems="center" >
+        <Box display="flex" flexDirection="column" alignItems="center"    >
         
           {travelguide ? (
             travelguide.map((travel) => {
@@ -41,6 +40,8 @@ export default function TravelGuidePage() {
                   overflow='hidden'
                   variant='outline'
                   width="80vw"
+              
+                
                 >
                   <Image
                     objectFit='cover'
@@ -99,7 +100,7 @@ export default function TravelGuidePage() {
           ) : 
           <Box minH="70vh" display="flex" justifyContent="center" alignItems="center" >
             <PacmanLoader
-              color="#f9e700"
+              color="#ffdca9;"
               size={60}
             />
           </Box>

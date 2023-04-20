@@ -12,19 +12,23 @@ code {
     monospace;
 }
 .lightNav{
-  background-color: bisque;
+  background-color: #FAAB78;
+  
 }
 .darkNav{
-  background-color: black;
+  background-color: gray;
+  color: white;
 }
 .lightBody{
-  background-color: yellow;
+  background-color: #ffdca9;
 }
 .darkBody{
   background-color: black;
+  color: white;
 }
 .darkCard{
-  background-color: grey;
+  background-color: #0c0c0b;
+  color: white;
 }
 .lightCard{
   background-color: aqua;

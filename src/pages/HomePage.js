@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useMemo } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
 import { Avatar, Box, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading,  Image, SimpleGrid, Text, Tag, Menu, MenuButton, MenuList, Input } from "@chakra-ui/react";
@@ -7,15 +7,25 @@ import { PacmanLoader } from "react-spinners";
 import Moment from 'react-moment';
 import 'moment-timezone';
 import { Link } from "react-router-dom";
+import "../index.css";
+import { ThemeContext } from "../context/theme.context";
 
 
 function HomePage() {
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
   const [update, setUpdate] = useState(true);
   const [query, setQuery] = useState("");
   const [comment, setComment] = useState("");
   
-  const {storedToken, user} = useContext(AuthContext)
+  const {storedToken, user} = useContext(AuthContext);
+  const { bodyTheme, cardsTheme} =useContext(ThemeContext);
+
+  const filteredPosts = useMemo(() => {
+    return posts.filter( post => {
+      return post.tags.includes(query)
+    })
+  }, [posts, query])
+
   useEffect(() => {
     axios
     .get(
@@ -92,7 +102,7 @@ function HomePage() {
   }
 
   return (
-    <div>
+    <div className={bodyTheme}>
     
 
       <Input
@@ -110,10 +120,10 @@ function HomePage() {
       <SimpleGrid p={10} spacing={4} minChildWidth="250px">
 
       {posts ? 
-        posts.map((post) => {
+        filteredPosts.map((post) => {
           return (
 
-        <Card key={post._id} maxW='sm'>
+        <Card key={post._id} maxW='sm' className={cardsTheme}>
 
           <CardHeader>
           <Link to={"/users/" + post.user._id}>

@@ -2,12 +2,13 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { AuthContext } from "../context/auth.context";
-import {Flex, Button, IconButton, Image} from '@chakra-ui/react'
+import {Flex, Button, IconButton, Image, Switch, Box} from '@chakra-ui/react'
 import {HamburgerIcon, CloseIcon} from '@chakra-ui/icons'
 
 import { Avatar } from "@chakra-ui/avatar";
 
 import TravelsgramLogo from "../images/TravelsgramLogo.png"
+import { ThemeContext } from "../context/theme.context";
 
  
 function Navbar() {
@@ -18,13 +19,15 @@ function Navbar() {
     logOutUser         
   } = useContext(AuthContext);
 
+  const { navTheme,toggleTheme } = useContext(ThemeContext)
+
   const [display, changeDisplay] = useState('none');
   
 
  
 
   return (
-    <Flex justify="center" alignItems="center" bg="gray.100">
+    <Flex justify="center" alignItems="center" className={navTheme}>
      <Flex align="center">
      <Link to="/"> <Image src={TravelsgramLogo}  /> </Link>
 
@@ -37,6 +40,11 @@ function Navbar() {
       <Link to="/users"> 
       <Button as="a" variant="ghost" arial-label="Home" my={5} w="100%"> User List </Button>
       </Link>
+      <Box>
+        <Button onClick={toggleTheme}></Button>
+         
+      </Box>
+      
 
       {!isLoggedIn && 
       <>

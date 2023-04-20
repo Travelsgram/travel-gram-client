@@ -4,6 +4,7 @@ import { AuthContext } from "../context/auth.context";
 import { Button, Card, Image, Input, Flex, CardBody, CardFooter, Heading, Text, SimpleGrid, Box } from "@chakra-ui/react";
 import { PacmanLoader } from "react-spinners";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../context/theme.context";
 
 function UserList() {
 const [users, setUsers] = useState(null);
@@ -13,13 +14,8 @@ const [getCurUser, setGetCurUser] = useState(true)
 const [errorMessage, setErrorMessage] = useState(undefined);
 
 const {storedToken, user} = useContext(AuthContext);
+const { bodyTheme } = useContext(ThemeContext);
 
-
-/*function getDate(dateString) {
-  var birthDate = new Date();
-  var formattedDate = birthDate.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'});
-  return formattedDate;
-}*/
 function getAge(dateString) {
   var today = new Date();
   var birthDate = new Date(dateString);
@@ -99,12 +95,8 @@ useEffect(() => {
   }
 
   return (
-    <div>
+    <div className={bodyTheme}>
 
-       
-       
-      
- 
       {users && curUser ?
       
         <SimpleGrid p={5} spacing={4} minChildWidth="200px">
@@ -116,7 +108,7 @@ useEffect(() => {
                   <Flex flex='1' gap='10' alignItems='center' flexWrap='wrap' justify="space-between" flexDirection='column'>
                     <Link to={"/users/" + thisUser._id}>
                     <CardBody> 
-                      <Image borderRadius='full' objectFit='cover' fallbackSrc='https://via.placeholder.com/200' src={thisUser.profileImg} alt={thisUser.name}  />
+                      <Image borderRadius='50%' boxSize={{base: "250px", md: "250px", xl:"150px"}} objectFit='cover' src={thisUser.profileImg} alt={thisUser.name}  />
                       <Heading size="sm" p={5}>{thisUser.name}</Heading>
                       
                       <Text>{getAge(thisUser.birthdate)} </Text>

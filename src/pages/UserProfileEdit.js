@@ -4,12 +4,15 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import service from "../api/service";
+import { ThemeContext } from "../context/theme.context";
+import { Box } from "@chakra-ui/react";
 
 function UserProfileEdit(props){
     const {storedToken, user} = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState(undefined);
     
-    const { setUser } = useContext(AuthContext)
+    const { setUser } = useContext(AuthContext);
+    const { bodyTheme } = useContext(ThemeContext);
 
    
     
@@ -66,7 +69,7 @@ function UserProfileEdit(props){
 
 
     return(
-        <>
+        <Box className={bodyTheme}>
             <UserEdit 
                 name={name}
                 setName={setName}
@@ -81,7 +84,7 @@ function UserProfileEdit(props){
                 handleFileUpload={handleFileUpload}
                 profileUpdate={props.profileUpdate}
             />
-        </>
+        </Box>
     )
 
 } 

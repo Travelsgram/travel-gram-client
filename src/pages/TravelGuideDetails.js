@@ -6,11 +6,14 @@ import { Box, Image, Text, Divider, Stack, Heading } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faCalendarCheck, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { PacmanLoader } from "react-spinners";
+import { ThemeContext } from "../context/theme.context";
 
  function TravelGuideDetails () {
   const [oneTravel, setOneTravel] = useState(null);
   const { travelguideId } = useParams();
+
   const { storedToken } = useContext(AuthContext);
+  const { bodyTheme } = useContext(ThemeContext)
 
   useEffect(() => {
     axios
@@ -84,7 +87,7 @@ import { PacmanLoader } from "react-spinners";
   };
 
   return (
-    <>
+    <Box className={bodyTheme}>
       {oneTravel ? renderDetails() 
       :
       <Box minH="70vh" display="flex" justifyContent="center" alignItems="center" >
@@ -93,7 +96,7 @@ import { PacmanLoader } from "react-spinners";
           size={60}
         />
       </Box>}
-    </>
+    </Box>
   );
   
 }

@@ -1,20 +1,28 @@
-import React from "react";
-import { IconButton, Text, Image } from "@chakra-ui/react";
+import React, { useContext } from "react";
+import { IconButton, Text, Image, Box } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
 import { VStack } from "@chakra-ui/layout";
 import TravelsgramLogo from "../images/TravelsgramLogo.png"
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../context/theme.context";
+
+import "../index.css"
 
 function Footer() {
+
+  const { navTheme } = useContext(ThemeContext);
+
   return (
+    <Box >
     <VStack
       as="footer"
       role="contentinfo"
       py={{ base: "8", md: "8" }}
       w="100%"
-      bg="gray.100"
+      
       alignItems="center"
       justifyContent="center"
+      className={navTheme}
     >
       <Text spacing={{ base: "4", md: "5" }}>
 
@@ -45,6 +53,7 @@ function Footer() {
         </Text>
       </Text>
     </VStack>
+    </Box>
   );
 }
 

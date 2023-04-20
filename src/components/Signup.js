@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Box, Button, Heading, Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
 function Signup(props){

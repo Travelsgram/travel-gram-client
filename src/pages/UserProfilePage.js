@@ -9,6 +9,7 @@ import CreateTravelguide from "../components/CreateTravelguide";
 import { Grid, GridItem, Box, Button, Card, CardBody, CardFooter, Image, Text, Avatar, Tag, SimpleGrid, Heading } from "@chakra-ui/react";
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../context/theme.context";
 
 function UserProfilePage(){
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -21,6 +22,7 @@ function UserProfilePage(){
     const [showPosts, setShowPosts] = useState(true)
     
     const { storedToken, user, logOutUser } = useContext(AuthContext);
+    const { bodyTheme } = useContext(ThemeContext);
     
 
     useEffect( () => {
@@ -164,7 +166,7 @@ function UserProfilePage(){
 
 
     return(
-      <> {profileInfo &&
+      <Box className={bodyTheme}> {profileInfo &&
 
         <Grid templateColumns="repeat(6, 1fr)" >
 
@@ -412,7 +414,7 @@ function UserProfilePage(){
         {createPostForm && <CreatePost postCreate={postCreate} getSiteUpdate={getSiteUpdate} />}
 
         {createTravelguideForm && <CreateTravelguide travelguideCreate={travelguideCreate} getSiteUpdate={getSiteUpdate} />}
-      </>
+      </Box>
     )
 }
 

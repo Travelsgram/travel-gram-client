@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Link, useParams } from "react-router-dom";
 import { Avatar, Box, Button, Card, CardBody, CardFooter, Heading, Image, SimpleGrid, Tag, Text } from "@chakra-ui/react";
+import { ThemeContext } from "../context/theme.context";
 
 
 
@@ -11,6 +12,7 @@ function UserDetailsPage() {
     const [showPosts, setShowPosts] = useState(true)
 
     const {storedToken} = useContext(AuthContext);
+    const { bodyTheme } = useContext(ThemeContext)
 
     const {id} = useParams();
 
@@ -46,7 +48,7 @@ function UserDetailsPage() {
       }
 
     return(
-        <>
+        <Box classname={bodyTheme}>
        
             {curUser &&
             <Box display="flex" flexDirection="column" alignItems="center">
@@ -269,7 +271,7 @@ function UserDetailsPage() {
                
             }
         
-        </>
+        </Box>
     )
 }
 

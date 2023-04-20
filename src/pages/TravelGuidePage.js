@@ -4,12 +4,15 @@ import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
 import { Card, CardBody, CardFooter, Heading, Image, Box, Stack, Text, Button } from "@chakra-ui/react";
 import { PacmanLoader } from "react-spinners";
+import { ThemeContext } from "../context/theme.context";
 
 
 export default function TravelGuidePage() {
     const [travelguide, setTravelGuide] = useState(null);
     
     const {storedToken} = useContext(AuthContext);
+    const { bodyTheme } = useContext(ThemeContext)
+
     useEffect(() => {
         axios
           .get(`${process.env.REACT_APP_API_URL}/api/travelguide`,
@@ -22,8 +25,8 @@ export default function TravelGuidePage() {
       }, []);
     
       return (
-        <Box my={10}>
-        <Heading >Travel Guide </Heading>
+        <Box className={bodyTheme}>
+        <Heading py={4}>Travel Guide </Heading>
         
 
         <Box display="flex" flexDirection="column" alignItems="center" >

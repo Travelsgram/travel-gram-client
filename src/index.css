@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.lightNav{
+  background-color: bisque;
+}
+.darkNav{
+  background-color: black;
+}
+.lightBody{
+  background-color: yellow;
+}
+.darkBody{
+  background-color: black;
+}
+.darkCard{
+  background-color: grey;
+}
+.lightCard{
+  background-color: aqua;
+}

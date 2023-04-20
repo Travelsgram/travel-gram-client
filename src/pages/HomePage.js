@@ -160,7 +160,7 @@ function HomePage() {
               />
             </Box>
             }
-            <Box py={2} overflow="scroll" h={{ base: "7vh", md: "14vh", lg: "12vh" }}>
+            <Box py={2} overflow="scroll" h={{ base: "9vh", md: "14vh", lg: "12vh" }}>
               <Text as='samp' lineHeight="1.5" fontSize="md">
                 {post.description}
               </Text>
@@ -238,7 +238,7 @@ function HomePage() {
           >{post.tags.map( tag => {
             return (
               <Box mx="1">
-                  <Tag>#{tag}</Tag>
+                  <Tag>{tag}</Tag>
               </Box>
             )
           })}</Box>

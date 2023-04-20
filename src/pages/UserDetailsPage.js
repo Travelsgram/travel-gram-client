@@ -48,7 +48,7 @@ function UserDetailsPage() {
       }
 
     return(
-        <Box classname={bodyTheme}>
+        <Box className={bodyTheme}>
        
             {curUser &&
             <Box display="flex" flexDirection="column" alignItems="center">

@@ -19,7 +19,6 @@ function Footer() {
       role="contentinfo"
       py={{ base: "8", md: "8" }}
       w="100%"
-      
       alignItems="center"
       justifyContent="center"
       className={navTheme}

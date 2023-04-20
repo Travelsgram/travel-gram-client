@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { AuthContext } from "../context/auth.context";
-import {Flex, Button, IconButton, Image, Switch, Box} from '@chakra-ui/react'
+import {Flex, Button, IconButton, Image, Box} from '@chakra-ui/react'
 import {HamburgerIcon, CloseIcon} from '@chakra-ui/icons'
 
 import { Avatar } from "@chakra-ui/avatar";
@@ -33,7 +33,10 @@ function Navbar() {
 
       <Flex display={['none','none' , 'flex' , 'flex']} >
 
-      <Link to="/travelguide"> 
+
+     {isLoggedIn &&
+    <>  
+     <Link to="/travelguide"> 
       <Button as="a" variant="ghost" arial-label="Home" my={5} w="100%"> Travel Guide</Button>
       </Link>
 
@@ -44,6 +47,8 @@ function Navbar() {
         <Button onClick={toggleTheme}></Button>
          
       </Box>
+      </>
+        }
       
 
       {!isLoggedIn && 

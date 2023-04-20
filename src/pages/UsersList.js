@@ -95,7 +95,7 @@ useEffect(() => {
   }
 
   return (
-    <div className={bodyTheme}>
+    <Box className={bodyTheme} minH="70vh">
 
       {users && curUser ?
       
@@ -133,7 +133,7 @@ useEffect(() => {
        : 
        <Box minH="70vh" display="flex" justifyContent="center" alignItems="center" >
         <PacmanLoader
-          color="#f9e700"
+          color="#ffdca9"
           size={60}
         />
       </Box>
@@ -144,7 +144,7 @@ useEffect(() => {
       
     
       
-    </div>
+     </Box>
     
 );
 }

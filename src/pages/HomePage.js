@@ -6,13 +6,13 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { PacmanLoader } from "react-spinners";
 import Moment from 'react-moment';
 import 'moment-timezone';
+import { Link } from "react-router-dom";
 
 
 function HomePage() {
   const [posts, setPosts] = useState(null);
-  const [copyPosts, setCopyPosts] = useState(null)
   const [update, setUpdate] = useState(true);
-  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
   const [comment, setComment] = useState("");
   
   const {storedToken, user} = useContext(AuthContext)
@@ -23,8 +23,6 @@ function HomePage() {
       { headers: {Authorization: `Bearer ${storedToken}`}})
     .then((response) => {
       setPosts(response.data);
-      setCopyPosts(response.data)
-      
     })
     .catch((err) => console.log("error getting posts from API", err))
   
@@ -44,17 +42,6 @@ function HomePage() {
 
   const refresh = () => {
     update ? setUpdate(false) : setUpdate(true)
-  }
-
-  const newSearch = (e) => {
-    setSearch(e.target.value);
-    const copy =[...copyPosts]
-    search 
-    ?
-    setPosts(copy.filter( post => post.tags.join(" ").includes(search)))
-    :
-    
-    refresh()
   }
 
   const newComment = (e, id) => {
@@ -110,11 +97,11 @@ function HomePage() {
 
       <Input
         my={{base:"15px", lg:"5px"}}
-        width="80vw"
+        width="50vw"
         type="text"
-        value={search}
+        value={query}
         placeholder="Search for tags"
-        onChange={(e)=>{newSearch(e)}}
+        onChange={(e) => {setQuery(e.target.value)}}
         
       />
 
@@ -129,6 +116,7 @@ function HomePage() {
         <Card key={post._id} maxW='sm'>
 
           <CardHeader>
+          <Link to={"/users/" + post.user._id}>
             <Flex spacing='4'>
               <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap' justify="space-between">
                 <Avatar name={post.user.name} src={post.user.profileImg}  />
@@ -139,6 +127,7 @@ function HomePage() {
                 </Box>
               </Flex> 
             </Flex>
+          </Link>
           </CardHeader>
 
           <CardBody textAlign='left'>
@@ -223,10 +212,10 @@ function HomePage() {
               }
             </Box>
             <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center">
-              <Text fontSize="xs"  flex='1' variant='ghost' >
+              <Text fontSize="xs"   variant='ghost' >
                 {post.comments.length} comments
               </Text>
-              <Text>
+              <Text fontSize="xs"   variant='ghost'>
                 <Moment fromNow>{post.createdAt}</Moment>
               </Text>
             </Box>

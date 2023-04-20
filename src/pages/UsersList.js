@@ -1,26 +1,34 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
+import { Button, Card, Image, Input, Flex, CardBody, CardFooter, Heading, Text, SimpleGrid, Box } from "@chakra-ui/react";
+import { PacmanLoader } from "react-spinners";
 import { Link } from "react-router-dom";
-import { Button, Card, Image, Input, Flex, CardBody, CardFooter, Heading, Text, SimpleGrid } from "@chakra-ui/react";
 
-
-export default function UserProfile() {
+function UserList() {
 const [users, setUsers] = useState(null);
 const [getUpdate, setGetUpdate] = useState(true);
-const [search, setSearch] = useState("");
-const [userDetails, setUserDetails] = useState(false);
-const [userDetId, setUserDetId] = useState("");
-const [followingUsers, setFollowingUsers] = useState([]);
+const [curUser, setCurUser] = useState(null);
+const [getCurUser, setGetCurUser] = useState(true)
+const [errorMessage, setErrorMessage] = useState(undefined);
 
-const {storedToken} = useContext(AuthContext);
-
+const {storedToken, user} = useContext(AuthContext);
 
 
-function getDate(dateString) {
+/*function getDate(dateString) {
   var birthDate = new Date();
   var formattedDate = birthDate.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'});
   return formattedDate;
+}*/
+function getAge(dateString) {
+  var today = new Date();
+  var birthDate = new Date(dateString);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+  }
+  return age;
 }
 
 useEffect(() => {
@@ -31,10 +39,30 @@ useEffect(() => {
     .then((response) => {
       setUsers(response.data);
     })
-    .catch((err) => console.log("error getting user from API", err));
+    .catch(error => {
+      const errorDescription = error.response.data.message;
+      setErrorMessage(errorDescription);
+  });
   
 
   }, [getUpdate]);
+
+useEffect(() => {
+  if(user){
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/users/${user._id}`,
+        { headers: {Authorization: `Bearer ${storedToken}`}})
+      .then( response => {
+        setCurUser(response.data)
+        getSiteUpdate()
+      })
+      .catch( error => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      })
+  }
+
+},[getCurUser])
 
   const addFollow = (followId) => {
 
@@ -44,8 +72,8 @@ useEffect(() => {
         { headers: {Authorization: `Bearer ${storedToken}`}}
         )
       .then(response =>{
-        setFollowingUsers([...followingUsers, followId]);
         getSiteUpdate();
+        updateUserData();
       })
       .catch((err) => console.log("error getting user from API", err))
 
@@ -53,84 +81,73 @@ useEffect(() => {
   const getSiteUpdate = () => {
     getUpdate ? setGetUpdate(false) : setGetUpdate(true)
   }
-  const getSearch = (e) => {
-    setSearch(e.target.value);
-    getSiteUpdate();
+  const updateUserData = () => {
+    getCurUser ? setGetCurUser(false) : setGetCurUser(true) 
   }
-  const renderUserDetails = (id) => {
-    const isFollowing = followingUsers.includes(id);
 
-    if(userDetails){
-      setUserDetails(false);
-      setUserDetails(false);
-    }else if(!userDetails){
-      setUserDetId(id);
-      setUserDetails(true);
+  const renderButton = (id) => {
+    if(user){
+      let str = "follow";
+      curUser.followers.forEach( element => {
+        if(id === element._id){
+          str = "following"
+        }
+      })
+      return str;
     }
-    setFollowingUsers(isFollowing ? "Following" : "Follow");
-  }
 
+  }
 
   return (
     <div>
 
-      {!userDetails && 
-        <div>
-      
-
-      <Input  
-        my="5vh"
-        width="50vw"
-        type="text"
-        placeholder="Search User"
-        value={search}
-        onChange={(e)=>{getSearch(e)}} />
-
-
+       
+       
       
  
-      {users ? 
+      {users && curUser ?
       
         <SimpleGrid p={5} spacing={4} minChildWidth="200px">
-        {users.map((thisUser) => {
-          return (
+          {users.map((thisUser) => {
+            return (
 
-            <Card key={thisUser._id} className="User"  maxWidth='250px'  > 
-            <Flex spacing='10' >  
-            <Flex flex='1' gap='10' alignItems='center' flexWrap='wrap' justify="space-between" flexDirection='row'>
-
+              <Card key={thisUser._id} className="User"  maxWidth='250px'  > 
+                <Flex spacing='10' >  
+                  <Flex flex='1' gap='10' alignItems='center' flexWrap='wrap' justify="space-between" flexDirection='column'>
+                    <Link to={"/users/" + thisUser._id}>
+                    <CardBody> 
+                      <Image borderRadius='full' objectFit='cover' fallbackSrc='https://via.placeholder.com/200' src={thisUser.profileImg} alt={thisUser.name}  />
+                      <Heading size="sm" p={5}>{thisUser.name}</Heading>
+                      
+                      <Text>{getAge(thisUser.birthdate)} </Text>
+                      <Text>{thisUser.location}</Text>
+                    </CardBody>
+                    </Link>
+                  </Flex>
+                </Flex>
+                <CardFooter>  
+                
+                  <Button onClick={() => {addFollow(thisUser._id)}} flex='1' >{curUser && renderButton(thisUser._id)}</Button>
+                </CardFooter>
             
-            <Link onClick={()=>{renderUserDetails(thisUser._id)}}>
-
-          
-            <CardBody display='relative' > 
-            <Image borderRadius='full' objectFit='cover' fallbackSrc='https://via.placeholder.com/200' src={thisUser.profileImg} alt={thisUser.name}  />
-            <Heading size="sm" p={5}> User name: {thisUser.name}</Heading>
-    
-            
-            <Text> Birthday : {getDate(thisUser.birthdate)} </Text>
-            <Text> Location: {thisUser.location}</Text>
-            </CardBody>
-            </Link>
-            </Flex>
-            </Flex>
-            <CardFooter>  
-            <Button onClick={() => {addFollow(thisUser._id)}} flex='1'  >{followingUsers.includes(thisUser._id) ? "Following" : "Follow"}</Button>
-            </CardFooter>
-            
-            </Card>
-          );
-        })}
+              </Card>
+            );
+          })}
         </SimpleGrid> 
         
        
       
 
        : 
-        <p> Loading user information...</p>
+       <Box minH="70vh" display="flex" justifyContent="center" alignItems="center" >
+        <PacmanLoader
+          color="#f9e700"
+          size={60}
+        />
+      </Box>
       }
-    </div>
-      }
+   
+      
 
       
     
@@ -139,3 +156,5 @@ useEffect(() => {
     
 );
 }
+
+export default UserList;

@@ -5,6 +5,7 @@ import axios from "axios";
 import { Box, Image, Text, Divider, Stack, Heading } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faCalendarCheck, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { PacmanLoader } from "react-spinners";
 
  function TravelGuideDetails () {
   const [oneTravel, setOneTravel] = useState(null);
@@ -84,7 +85,14 @@ import { faBell, faCalendarCheck, faMapMarkerAlt } from '@fortawesome/free-solid
 
   return (
     <>
-      {oneTravel ? renderDetails() : <p>Loading details...</p>}
+      {oneTravel ? renderDetails() 
+      :
+      <Box minH="70vh" display="flex" justifyContent="center" alignItems="center" >
+        <PacmanLoader
+          color="#f9e700"
+          size={60}
+        />
+      </Box>}
     </>
   );
   

@@ -6,8 +6,8 @@ import {Flex, Button, IconButton, Image} from '@chakra-ui/react'
 import {HamburgerIcon, CloseIcon} from '@chakra-ui/icons'
 
 import { Avatar } from "@chakra-ui/avatar";
-import logo from "../images/logo.png";
 
+import TravelsgramLogo from "../images/TravelsgramLogo.png"
 
  
 function Navbar() {
@@ -26,7 +26,7 @@ function Navbar() {
   return (
     <Flex justify="center" alignItems="center" bg="gray.100">
      <Flex align="center">
-     <Link to="/"> <Image src={logo}  /> </Link>
+     <Link to="/"> <Image src={TravelsgramLogo}  /> </Link>
 
       <Flex display={['none','none' , 'flex' , 'flex']} >
 

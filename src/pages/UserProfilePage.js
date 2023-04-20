@@ -8,6 +8,7 @@ import UserInfo from "../components/UserInfo";
 import CreateTravelguide from "../components/CreateTravelguide";
 import { Grid, GridItem, Box, Button, Card, CardBody, CardFooter, Image, Text, Avatar, Tag, SimpleGrid, Heading } from "@chakra-ui/react";
 import { DeleteIcon } from '@chakra-ui/icons';
+import { Link } from "react-router-dom";
 
 function UserProfilePage(){
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -355,12 +356,13 @@ function UserProfilePage(){
                 curUser.followers.map(follower => {
                   return(
                     <Box   borderRadius="10px" my={2} boxShadow='base' key={follower._id} display="flex" flexDirection="column" alignItems="center" >
+                      <Link to={"/users/"+follower._id}>
                       <Image
                         borderRadius='full'
                         boxSize='70px'
                         src={follower.profileImg}
                         alt={follower.name}
-                      />
+                      /></Link>
 
                       <Text as='b'>
                         {follower.name}
@@ -387,6 +389,7 @@ function UserProfilePage(){
                      <Box boxShadow='lg'>
                       <button  as="kbd" onClick={()=>{unfollowUser(follower._id)}}>Unfollow</button>
                      </Box>
+                     
                     </Box>
                    
                   )

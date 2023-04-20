@@ -12,12 +12,12 @@ function UserDetailsPage() {
 
     const {storedToken} = useContext(AuthContext);
 
-    const {userId} = useParams();
+    const {id} = useParams();
 
     useEffect( () => {
         axios
         .get(
-            `${process.env.REACT_APP_API_URL}/api/users/${userId}`,
+            `${process.env.REACT_APP_API_URL}/api/users/${id}`,
             { headers: {Authorization: `Bearer ${storedToken}`}}
             )
         .then( response => {
@@ -33,6 +33,17 @@ function UserDetailsPage() {
         setShowPosts(false)
       }
 
+      const getNewUser = (id) => {
+        axios
+        .get(
+            `${process.env.REACT_APP_API_URL}/api/users/${id}`,
+            { headers: {Authorization: `Bearer ${storedToken}`}}
+            )
+        .then( response => {
+            setCurUser(response.data)
+        })
+        .catch((err) => console.log("error getting user from API", err))
+      }
 
     return(
         <>
@@ -216,14 +227,14 @@ function UserDetailsPage() {
                     <Box display="flex" flexDirection="row" width="80vw" overflow="scroll">
                     {curUser.followers.map(follower => {
                         return(
-                            <Box mx={2}  borderRadius="10px" my={2} boxShadow='base' key={follower._id} display="flex" flexDirection="column" alignItems="center" >
+                            <Box mx={2}  borderRadius="10px" my={2} boxShadow='base' key={follower._id} display="flex" flexDirection="column" alignItems="center" onClick={()=>{getNewUser(follower._id)}} >
                                 <Image
                                     borderRadius='full'
                                     boxSize='70px'
                                     src={follower.profileImg}
                                     alt={follower.name}
                                 />
-
+                                
                                 <Text as='b'>
                                     {follower.name}
                                 </Text>

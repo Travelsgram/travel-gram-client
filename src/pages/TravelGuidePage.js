@@ -65,8 +65,8 @@ export default function TravelGuidePage() {
                     </CardFooter>
                   </Stack>
 
-                  <Box display="flex" flexDir="column" alignItems="center" m={5}>
                   <Link to={"/users/"+travel.user._id} >
+                  <Box display="flex" flexDir="column" alignItems="center" m={5}>
                     <Image
                       boxSize='50px'
                       objectFit='cover'
@@ -80,8 +80,8 @@ export default function TravelGuidePage() {
                     <Text as="em" fontSize='xs'>
                       {travel.user.location} 
                     </Text>
-                  </Link>
                   </Box>
+                  </Link>
                   
              
                 </Card>

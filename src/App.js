@@ -25,7 +25,7 @@ function App() {
         <Route path="/userprofile" element={<UserProfilePage />} />
         <Route path="/travelguide/:travelguideId" element={<TravelGuideDetails />} />
         <Route path='/users' element={<UserList/>}/>
-        <Route path="/users/:userId" element={<UserDetailsPage />}/>
+        <Route path="/users/:id" element={<UserDetailsPage />}/>
       </Routes>
 
       <Footer/>

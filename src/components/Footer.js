@@ -2,7 +2,7 @@ import React from "react";
 import { IconButton, Text, Image } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
 import { VStack } from "@chakra-ui/layout";
-import logo from "../images/logo.png";
+import TravelsgramLogo from "../images/TravelsgramLogo.png"
 import { Link } from "react-router-dom";
 
 function Footer() {
@@ -18,7 +18,7 @@ function Footer() {
     >
       <Text spacing={{ base: "4", md: "5" }}>
 
-        <Link to="/"> <Image src={logo} left="2.5rem" pos="relative" /> </Link>
+        <Link to="/"> <Image src={TravelsgramLogo} left="2.5rem" pos="relative" /> </Link>
 
         <Text fontSize="sm" color="subtle">
           &copy; {new Date().getFullYear()} Created by Travelsgram Team

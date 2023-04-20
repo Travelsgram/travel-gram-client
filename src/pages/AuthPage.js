@@ -35,17 +35,6 @@ function AuthPage(props){
     const handleSignupSubmit = (e) => {
         e.preventDefault();
 
-        if(!image){
-            const num = Math.floor(Math.random() * (3 - 1 + 1) + 1);
-            if(num === 1){
-                setImage({imageOne});
-            }else if(num === 2){
-                setImage({imageTwo});
-            }else if(num === 3){
-                setImage({imageThree})
-            }
-        }
-
     if(image){
         const uploadData = new FormData();
         uploadData.append("image", image);

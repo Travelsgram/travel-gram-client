@@ -22,7 +22,7 @@ function HomePage() {
 
   const filteredPosts = useMemo(() => {
     return posts.filter( post => {
-      return post.tags.includes(query)
+      return post.tags.join(" ").toLowerCase().includes(query.toLowerCase())
     })
   }, [posts, query])
 
@@ -102,7 +102,7 @@ function HomePage() {
   }
 
   return (
-    <div className={bodyTheme}>
+    <Box minH="70vh" className={bodyTheme}>
     
 
       <Input
@@ -259,7 +259,7 @@ function HomePage() {
       }
       </SimpleGrid>
 
-    </div>
+    </Box>
   );
 }
 

@@ -252,6 +252,7 @@ function UserProfilePage(){
                                   return(
                                     <Card
                                       key={comment._id}
+                                      bg={boxTheme}
                                     >
                           
                           

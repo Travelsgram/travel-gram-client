@@ -46,7 +46,8 @@ export default function TravelGuidePage() {
                 >
                   <Image
                     objectFit='cover'
-                    maxW={{ base: '100%', sm: '80vw' }}
+                    width={{base:"100px", md:"180px", lg:"250px"}}
+                    height={{base:"100px", md:"180px", lg:"250px"}}
                     src={travel.image}
                     alt='guideIMG'
                     borderRadius="15px"
@@ -54,11 +55,9 @@ export default function TravelGuidePage() {
 
                   <Stack width="70%">
                     <CardBody m={15}>
-                      <Heading size='md'>{travel.title}</Heading>
+                      <Heading size={{base:"xs", md:"sm", lg:"md"}}>{travel.title}</Heading>
 
-                      <Text py='2'>
-                        {travel.description}
-                      </Text>
+                     
                     </CardBody>
 
                     <CardFooter>
@@ -91,11 +90,6 @@ export default function TravelGuidePage() {
              
                 </Card>
 
-
-                
-               
-              
-                
               );
             })
           ) : 

@@ -72,7 +72,7 @@ function CreateTravelguide(props){
     };
 
     return(
-        <Box my={5} display="flex" flexDirection="column" alignItems="center">
+        <Box py={5} display="flex" flexDirection="column" alignItems="center">
             <Box minH="70vh" width="80vw" boxShadow="dark-lg" borderRadius={10} display="flex" flexDirection="column" alignItems="center" >
                 <Heading my={3}>Create a new Travelguide</Heading>
                 <Box width="60%" my={5} >
@@ -110,7 +110,7 @@ function CreateTravelguide(props){
                             onChange={(e)=>{setTitle(e.target.value)}}
                         />
                             <Textarea 
-                            placeholder="Explain your travel"
+                            placeholder="Describe your travel"
                             my={1}
                             errorBorderColor="rew.300"
                             name="description"
@@ -121,7 +121,7 @@ function CreateTravelguide(props){
                         />
 
                         <Textarea 
-                            placeholder="Add your activities that you made"
+                            placeholder="Add activities that you made"
                             my={1}
                             errorBorderColor="rew.300"
                             name="activities"

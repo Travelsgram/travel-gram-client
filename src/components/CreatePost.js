@@ -65,7 +65,7 @@ function CreatePost(props){
       };
     
       return (
-        <Box my={5} display="flex" flexDirection="column" alignItems="center">
+        <Box py={5} display="flex" flexDirection="column" alignItems="center">
         <Box minH="70vh" width="80vw" boxShadow="dark-lg" borderRadius={10} display="flex" flexDirection="column" alignItems="center" >
           <Heading my={3}>Create a new Post</Heading>
           <Box width="60%" my={5} >

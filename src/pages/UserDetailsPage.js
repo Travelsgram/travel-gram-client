@@ -92,8 +92,8 @@ function UserDetailsPage() {
                 <Box minHeight="80vh" display="flex" flexDirection="column" alignItems="center">
 
                     <Box display="flex" flexDirection="row" width="80vw" justifyContent="space-between" >
-                        <Button onClick={renderPosts}>Posts</Button>
-                        <Button onClick={renderTravelguides}>Travelguides</Button>
+                        <Button colorScheme='teal' onClick={renderPosts}>Posts</Button>
+                        <Button colorScheme='teal' onClick={renderTravelguides}>Travelguides</Button>
                     </Box>
 
 

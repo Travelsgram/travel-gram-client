@@ -99,10 +99,17 @@ export default function TravelGuidePage() {
             })
           ) : 
           <Box minH="70vh" display="flex" justifyContent="center" alignItems="center" >
+          {bodyTheme === "lightBody" ?
             <PacmanLoader
-              color="#ffdca9;"
+              color="black"
               size={60}
             />
+          :
+            <PacmanLoader
+              color="yellow"
+              size={60}
+            />
+          }
           </Box>
           }  
           </Box>

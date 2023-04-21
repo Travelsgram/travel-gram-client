@@ -119,7 +119,7 @@ function HomePage() {
 
       <SimpleGrid p={10} spacing={4} minChildWidth="250px">
 
-      {posts ? 
+      {posts.length > 1  ? 
         filteredPosts.map((post) => {
           return (
 
@@ -250,10 +250,17 @@ function HomePage() {
       })
       : 
       <Box minH="70vh" display="flex" justifyContent="center" alignItems="center" >
+      {bodyTheme === "lightBody" ?
         <PacmanLoader
-          color="#ffdca9"
+          color="black"
           size={60}
         />
+       :
+       <PacmanLoader
+          color="yellow"
+          size={60}
+        />
+      }
       </Box>
       
       }

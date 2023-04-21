@@ -191,9 +191,9 @@ function UserProfilePage(){
             width="100%"
           >
           
-            <Box display="flex" flexDirection="row" justifyContent="space-between" >
-                <Button onClick={renderPosts}>Posts</Button>
-                <Button onClick={renderTravelguides}>Travelguides</Button>
+            <Box my={3} display="flex" flexDirection="row" justifyContent="space-between" >
+                <Button colorScheme='teal' onClick={renderPosts}>Posts</Button>
+                <Button colorScheme='teal' onClick={renderTravelguides}>Travelguides</Button>
             </Box>
 
           {showPosts && 

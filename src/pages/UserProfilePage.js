@@ -10,6 +10,7 @@ import { Grid, GridItem, Box, Button, Card, CardBody, CardFooter, Image, Text, A
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../context/theme.context";
+import { PacmanLoader } from "react-spinners";
 
 function UserProfilePage(){
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -22,7 +23,7 @@ function UserProfilePage(){
     const [showPosts, setShowPosts] = useState(true)
     
     const { storedToken, user, logOutUser } = useContext(AuthContext);
-    const { bodyTheme, cardsTheme, boxTheme } = useContext(ThemeContext);
+    const { bodyTheme, cardsTheme, boxTheme, boxColor } = useContext(ThemeContext);
     
 
     useEffect( () => {
@@ -181,7 +182,7 @@ function UserProfilePage(){
           >
 
           {curUser && infoRender()}
-
+          
           </GridItem>
 
           <GridItem
@@ -196,6 +197,21 @@ function UserProfilePage(){
                 <Button colorScheme='teal' onClick={renderTravelguides}>Travelguides</Button>
             </Box>
 
+            {!curUser && 
+          <Box minH="70vh" display="flex" justifyContent="center" alignItems="center" >
+            {bodyTheme === "lightBody" ?
+              <PacmanLoader
+                color="black"
+                size={70}
+              />
+            :
+              <PacmanLoader
+                color="gray"
+                size={70}
+              />
+            }
+      </Box>
+        }
           {showPosts && 
             <Box boxShadow="lg" minHeight="80vh" my={5}>
             <SimpleGrid spacing={2} columns={[2, null, 3]}>
@@ -203,7 +219,7 @@ function UserProfilePage(){
                 
                   curUser.posts.map(post => {
                     return(
-                      <Card key={post._id} maxW='xs' bg={boxTheme} >
+                      <Card key={post._id} maxW='xs' bg={boxTheme} color={boxColor}>
                         <CardBody textAlign='left'>
                           <Box display="flex" flexDir="row" justifyContent="space-between" alignItems="center">
                             <Text as='em' fontSize='xs'>{post.location}</Text>
@@ -299,7 +315,7 @@ function UserProfilePage(){
        
                 curUser.travelguides.map(travelguide => {
                   return(
-                    <Box boxShadow="base" display="flex" flexDirection="column"
+                    <Box boxShadow="base" display="flex" flexDirection="column" bg={boxTheme} color={boxColor}
                     justifyContent="center" alignItems="center" key={travelguide._id}>
 
                     <Image

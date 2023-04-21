@@ -12,7 +12,7 @@ function UserDetailsPage() {
     const [showPosts, setShowPosts] = useState(true)
 
     const {storedToken} = useContext(AuthContext);
-    const { bodyTheme, cardsTheme, boxTheme } = useContext(ThemeContext)
+    const { bodyTheme, cardsTheme, boxTheme, boxColor } = useContext(ThemeContext)
 
     const {id} = useParams();
 
@@ -105,7 +105,7 @@ function UserDetailsPage() {
 
                                 curUser.posts.map(post => {
                                     return(
-                                        <Card key={post._id} maxW='xs' bg={boxTheme}>
+                                        <Card key={post._id} maxW='xs' bg={boxTheme} color={boxColor}>
                                             <CardBody textAlign='left'>
                                                 <Box display="flex" flexDir="row" justifyContent="space-between" alignItems="center">
                                                     <Text as='em' fontSize='xs'>{post.location}</Text>
@@ -190,7 +190,7 @@ function UserDetailsPage() {
        
                                 curUser.travelguides.map(travelguide => {
                                     return(
-                                        <Box boxShadow="base" display="flex" flexDirection="column"
+                                        <Box boxShadow="base" display="flex" flexDirection="column" bg={boxTheme} color={boxColor}
                                         justifyContent="center" alignItems="center" key={travelguide._id}>
 
                                             <Image

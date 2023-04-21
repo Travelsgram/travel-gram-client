@@ -10,7 +10,7 @@ import { ThemeContext } from "../context/theme.context";
 export default function TravelGuidePage() {
     const [travelguide, setTravelGuide] = useState(null);
     const {storedToken} = useContext(AuthContext);
-    const { bodyTheme, boxTheme } = useContext(ThemeContext)
+    const { bodyTheme, boxTheme, boxColor } = useContext(ThemeContext)
 
     useEffect(() => {
         axios
@@ -24,7 +24,7 @@ export default function TravelGuidePage() {
       }, []);
     
       return (
-        <Box className={bodyTheme}>
+        <Box minH="70vh" className={bodyTheme} color={boxColor}>
         <Heading py={4}>Travel Guide </Heading>
         
 
@@ -41,6 +41,7 @@ export default function TravelGuidePage() {
                   variant='outline'
                   width="80vw"
                   bg={boxTheme}
+                  color={boxColor}
               
                 
                 >

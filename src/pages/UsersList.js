@@ -14,7 +14,7 @@ const [getCurUser, setGetCurUser] = useState(true)
 const [errorMessage, setErrorMessage] = useState(undefined);
 
 const {storedToken, user} = useContext(AuthContext);
-const { bodyTheme, boxTheme } = useContext(ThemeContext);
+const { bodyTheme, boxTheme, boxColor } = useContext(ThemeContext);
 
 function getAge(dateString) {
   var today = new Date();
@@ -103,7 +103,7 @@ useEffect(() => {
           {users.map((thisUser) => {
             return (
 
-              <Card key={thisUser._id} className="User"  maxWidth='250px' bg={boxTheme}  > 
+              <Card key={thisUser._id} className="User"  maxWidth='250px' bg={boxTheme} color={boxColor}  > 
                 <Flex spacing='10' >  
                   <Flex flex='1' gap='10' alignItems='center' flexWrap='wrap' justify="space-between" flexDirection='column'>
                     <Link to={"/users/" + thisUser._id}>

@@ -19,6 +19,9 @@ code {
   background-color: gray;
   color: white;
 }
+.darkNav button{
+  color: #0c0c0b;
+}
 .lightBody{
   background-image: url("./images/backgroundLightTwo.jpeg");
   background-repeat: repeat;
@@ -29,11 +32,15 @@ code {
   background-image: url("./images/backgroundDarkTwo.jpeg");
   background-repeat: repeat;
   background-color: black;
-  color: white;
+  
+}
+.darkBody button{
+  color: #0c0c0b;
 }
 .darkCard{
   background-color: #0c0c0b;
   color: white;
+  
 }
 .lightCard{
   background-color: #ffdca9;
@@ -43,4 +50,5 @@ code {
   padding: 2px 15px;
   font-size: 1rem;
   text-align: center;
+  color: #FFFF33;
 }

@@ -18,7 +18,7 @@ function HomePage() {
   const [comment, setComment] = useState("");
   
   const {storedToken, user} = useContext(AuthContext);
-  const { bodyTheme, boxTheme} =useContext(ThemeContext);
+  const { bodyTheme, boxTheme, boxColor} =useContext(ThemeContext);
 
   const filteredPosts = useMemo(() => {
     return posts.filter( post => {
@@ -124,7 +124,7 @@ function HomePage() {
         filteredPosts.map((post) => {
           return (
 
-        <Card key={post._id} maxW='sm' bg={boxTheme}>
+        <Card key={post._id} maxW='sm' bg={boxTheme} color={boxColor} >
 
           <CardHeader>
           <Link to={"/users/" + post.user._id}>
@@ -199,7 +199,7 @@ function HomePage() {
               {post.comments && 
                   post.comments.map( comment => {
                     return(
-                          <Card key={comment._id} bg={boxTheme}>
+                          <Card key={comment._id} bg={boxTheme} color={boxColor}>
                           
                           
                           <Box display="flex" direction="row"  alignItems="center">

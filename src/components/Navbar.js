@@ -27,6 +27,7 @@ function Navbar() {
  
 
   return (
+
     <Flex justify="center" alignItems="center" className={navTheme}>
 
       <Flex align="center">

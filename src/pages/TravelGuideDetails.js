@@ -13,7 +13,7 @@ import { ThemeContext } from "../context/theme.context";
   const { travelguideId } = useParams();
 
   const { storedToken } = useContext(AuthContext);
-  const { bodyTheme, boxTheme } = useContext(ThemeContext)
+  const { bodyTheme, boxTheme, boxColor } = useContext(ThemeContext)
 
   useEffect(() => {
     axios
@@ -29,14 +29,16 @@ import { ThemeContext } from "../context/theme.context";
   const renderDetails = () => {
 
     return (
+      <Box display="flex" flexDirection="column" alignItems="center">
       <Box
       display="flex"
       flexDirection="column"
       alignItems="center"
-   
-      
-    
+      color={boxColor}
+      bg={boxTheme}
     >
+
+
 <Divider />
      <Heading my={5}>{oneTravel.title} Details </Heading>
      <Divider />
@@ -83,6 +85,7 @@ import { ThemeContext } from "../context/theme.context";
          </Stack>
         
       </Stack>
+    </Box>
     </Box>
     )
   };

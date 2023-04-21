@@ -169,7 +169,7 @@ function UserDetailsPage() {
                                                 >{post.tags.map( tag => {
                                                  return (
                                                     <Box mx="1">
-                                                    <Tag>#{tag}</Tag>
+                                                    <Tag>{tag}</Tag>
                                                     </Box>
                                                 )
                                                 })}

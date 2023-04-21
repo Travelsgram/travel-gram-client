@@ -36,7 +36,7 @@ function Footer() {
           Tuna Erkmen
           <IconButton
             as="a"
-            href="https://github.com/TunaErkmen.com/Travelsgram"
+            href="https://github.com/TunaErkmen"
             aria-label="GitHub"
             icon={<FaGithub fontSize="1.25rem" />}
             variant="ghost"

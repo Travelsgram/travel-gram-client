@@ -75,7 +75,7 @@ function AuthProviderWrapper(props){
                 setUser
             }}>
             {props.children}
-        </AuthContext.Provider >
+        </AuthContext.Provider>
     )
 }
 

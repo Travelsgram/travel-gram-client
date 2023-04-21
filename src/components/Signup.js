@@ -78,6 +78,8 @@ function Signup(props){
  
               <label>Location:</label>
               <Input 
+              errorBorderColor='red.300'
+              variant='filled' 
                 type="text"
                 name="location"
                 value={props.location}

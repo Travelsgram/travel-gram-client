@@ -191,7 +191,7 @@ function UserProfilePage(){
             width="100%"
           >
           
-            <Box my={3} display="flex" flexDirection="row" justifyContent="space-between" >
+            <Box my={3} px={3} display="flex" flexDirection="row" justifyContent="space-between" >
                 <Button colorScheme='teal' onClick={renderPosts}>Posts</Button>
                 <Button colorScheme='teal' onClick={renderTravelguides}>Travelguides</Button>
             </Box>
@@ -341,6 +341,7 @@ function UserProfilePage(){
           </GridItem>
 
           <GridItem
+            px={3}
             as="aside"
             colSpan={{base: 6, xl: 1}}
             minHeight="40vh"

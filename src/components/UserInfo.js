@@ -23,7 +23,7 @@ function UserInfo(props){
 
             <Image
                 my={7}
-                boxSize={{base: "250px", md: "250px", xl:"150px"}}
+                boxSize={{base: "220px", md: "250px", xl:"150px"}}
                 borderRadius='50%'
                 objectFit='cover'
                 src={props.image}
@@ -59,8 +59,8 @@ function UserInfo(props){
             </Text>
 
             <WrapItem my={3} >
-                <Button leftIcon={<MdBuild />} onClick={()=>{props.profileUpdate()}} colorScheme='yellow' size={{base:"lg", lg:"xs"}}>update my profile</Button>
-                <Button leftIcon={<DeleteIcon />} onClick={()=>{props.deleteProfile()}} colorScheme='red' size={{base:"lg", lg:"xs"}}>delete my profile</Button>
+                <Button leftIcon={<MdBuild />} onClick={()=>{props.profileUpdate()}} colorScheme='yellow' size={{base:"sm", lg:"xs"}}>update my profile</Button>
+                <Button leftIcon={<DeleteIcon />} onClick={()=>{props.deleteProfile()}} colorScheme='red' size={{base:"sm", lg:"xs"}}>delete my profile</Button>
             </WrapItem>
 
             

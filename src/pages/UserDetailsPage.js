@@ -136,7 +136,7 @@ function UserDetailsPage() {
                                                     {post.comments && 
                                                         post.comments.map( comment => {
                                                         return(
-                                                            <Card key={comment._id}>
+                                                            <Card key={comment._id} bg={boxTheme}>
                           
                           
                                                             <Box display="flex" direction="row"  alignItems="center">

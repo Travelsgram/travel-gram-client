@@ -214,7 +214,7 @@ function UserProfilePage(){
         }
           {showPosts && 
             <Box boxShadow="lg" minHeight="80vh" my={5}>
-            <SimpleGrid spacing={2} columns={[2, null, 3]}>
+            <SimpleGrid p={4} spacing={3} minChildWidth="250px">
               {curUser &&
                 
                   curUser.posts.map(post => {
@@ -310,7 +310,7 @@ function UserProfilePage(){
 
           {!showPosts && 
             <Box boxShadow="lg" minHeight="80vh" my={5}>
-            <SimpleGrid spacing={2} columns={[2, null, 3]}>
+            <SimpleGrid p={4} spacing={3} minChildWidth="250px">
               {curUser && 
        
                 curUser.travelguides.map(travelguide => {

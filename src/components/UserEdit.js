@@ -23,6 +23,7 @@ function UserEdit(props){
 
             <label>Name:</label>
             <Input 
+              maxLength="13"
               my={1}
               errorBorderColor='red.300'
               variant='filled'

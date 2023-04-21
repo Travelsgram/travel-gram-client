@@ -12,7 +12,7 @@ function UserDetailsPage() {
     const [showPosts, setShowPosts] = useState(true)
 
     const {storedToken} = useContext(AuthContext);
-    const { bodyTheme } = useContext(ThemeContext)
+    const { bodyTheme, cardsTheme, boxTheme } = useContext(ThemeContext)
 
     const {id} = useParams();
 
@@ -48,12 +48,12 @@ function UserDetailsPage() {
       }
 
     return(
-        <Box className={bodyTheme}>
+        <Box minH="70vh" className={bodyTheme}>
        
             {curUser &&
-            <Box display="flex" flexDirection="column" alignItems="center">
+            <Box display="flex" flexDirection="column" alignItems="center" >
 
-                <Box my={4} width="80vw" display="flex" flexDirection="column" justifyContent="center" boxShadow="dark-lg" p={10}>
+                <Box my={4} width="80vw" display="flex" flexDirection="column" className={cardsTheme} justifyContent="center" borderRadius="10px" boxShadow="dark-lg" p={10}>
 
                     <Box display="flex" flexDirection="row" justifyContent="space-evenly" alignItems="center">
 
@@ -105,7 +105,7 @@ function UserDetailsPage() {
 
                                 curUser.posts.map(post => {
                                     return(
-                                        <Card key={post._id} maxW='xs' >
+                                        <Card key={post._id} maxW='xs' bg={boxTheme}>
                                             <CardBody textAlign='left'>
                                                 <Box display="flex" flexDir="row" justifyContent="space-between" alignItems="center">
                                                     <Text as='em' fontSize='xs'>{post.location}</Text>
@@ -229,7 +229,7 @@ function UserDetailsPage() {
                     <Box display="flex" flexDirection="row" width="80vw" overflow="scroll">
                     {curUser.followers.map(follower => {
                         return(
-                            <Box mx={2}  borderRadius="10px" my={2} boxShadow='base' key={follower._id} display="flex" flexDirection="column" alignItems="center" onClick={()=>{getNewUser(follower._id)}} >
+                            <Box mx={2} className={cardsTheme}  borderRadius="10px" my={2} boxShadow='base' key={follower._id} display="flex" flexDirection="column" alignItems="center" onClick={()=>{getNewUser(follower._id)}} >
                                 <Image
                                     borderRadius='full'
                                     boxSize='70px'

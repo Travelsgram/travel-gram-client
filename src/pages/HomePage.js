@@ -18,7 +18,7 @@ function HomePage() {
   const [comment, setComment] = useState("");
   
   const {storedToken, user} = useContext(AuthContext);
-  const { bodyTheme, cardsTheme} =useContext(ThemeContext);
+  const { bodyTheme, boxTheme} =useContext(ThemeContext);
 
   const filteredPosts = useMemo(() => {
     return posts.filter( post => {
@@ -104,8 +104,9 @@ function HomePage() {
   return (
     <Box minH="70vh" className={bodyTheme}>
     
-
+    
       <Input
+        bg="white"
         my={{base:"15px", lg:"5px"}}
         width="50vw"
         type="text"
@@ -123,7 +124,7 @@ function HomePage() {
         filteredPosts.map((post) => {
           return (
 
-        <Card key={post._id} maxW='sm' className={cardsTheme}>
+        <Card key={post._id} maxW='sm' bg={boxTheme}>
 
           <CardHeader>
           <Link to={"/users/" + post.user._id}>
@@ -198,7 +199,7 @@ function HomePage() {
               {post.comments && 
                   post.comments.map( comment => {
                     return(
-                          <Card key={comment._id}>
+                          <Card key={comment._id} bg={boxTheme}>
                           
                           
                           <Box display="flex" direction="row"  alignItems="center">
@@ -253,12 +254,12 @@ function HomePage() {
       {bodyTheme === "lightBody" ?
         <PacmanLoader
           color="black"
-          size={60}
+          size={70}
         />
        :
        <PacmanLoader
-          color="yellow"
-          size={60}
+          color="gray"
+          size={70}
         />
       }
       </Box>

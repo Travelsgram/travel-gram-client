@@ -13,7 +13,7 @@ import { ThemeContext } from "../context/theme.context";
   const { travelguideId } = useParams();
 
   const { storedToken } = useContext(AuthContext);
-  const { bodyTheme } = useContext(ThemeContext)
+  const { bodyTheme, boxTheme } = useContext(ThemeContext)
 
   useEffect(() => {
     axios
@@ -33,6 +33,7 @@ import { ThemeContext } from "../context/theme.context";
       display="flex"
       flexDirection="column"
       alignItems="center"
+   
       
     
     >
@@ -90,12 +91,17 @@ import { ThemeContext } from "../context/theme.context";
     <Box className={bodyTheme}>
       {oneTravel ? renderDetails() 
       :
-      <Box minH="70vh" display="flex" justifyContent="center" alignItems="center" >
+      bodyTheme === "lightBody" ?
         <PacmanLoader
-          color="#ffdca9"
-          size={60}
+          color="black"
+          size={70}
         />
-      </Box>}
+       :
+       <PacmanLoader
+          color="gray"
+          size={70}
+        />
+      }
     </Box>
   );
   

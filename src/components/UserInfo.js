@@ -1,8 +1,12 @@
 import { Box, Button, Heading, Image, Text, WrapItem } from "@chakra-ui/react";
 import { MdBuild } from "react-icons/md";
 import { DeleteIcon } from '@chakra-ui/icons'
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 
 function UserInfo(props){
+
+    const {cardsTheme}= useContext(ThemeContext);
 
     function getAge(dateString) {
         var today = new Date();
@@ -16,7 +20,7 @@ function UserInfo(props){
     }
     
     return(
-        <>
+        <Box my={3} px={3} width="90%" className={cardsTheme} display="flex" flexDir="column" alignItems="center" borderRadius="12px" >
             <Heading as='h4' size='md'>
                 {props.name}'s profile
             </Heading>
@@ -58,9 +62,9 @@ function UserInfo(props){
                {props.email}
             </Text>
 
-            <WrapItem my={3} >
-                <Button leftIcon={<MdBuild />} onClick={()=>{props.profileUpdate()}} colorScheme='yellow' size={{base:"sm", lg:"xs"}}>update my profile</Button>
-                <Button leftIcon={<DeleteIcon />} onClick={()=>{props.deleteProfile()}} colorScheme='red' size={{base:"sm", lg:"xs"}}>delete my profile</Button>
+            <WrapItem my={3} px={3} >
+                <Button leftIcon={<MdBuild />} onClick={()=>{props.profileUpdate()}} colorScheme='yellow' size={{base:"sm", lg:"xs"}}>update profile</Button>
+                <Button leftIcon={<DeleteIcon />} onClick={()=>{props.deleteProfile()}} colorScheme='red' size={{base:"sm", lg:"xs"}}>delete profile</Button>
             </WrapItem>
 
             
@@ -68,7 +72,7 @@ function UserInfo(props){
                 <Button my={3} onClick={props.postCreate} colorScheme='teal' size={{base:"lg", lg:"xs"}}>create new post</Button>
                 <Button my={3} onClick={props.travelguideCreate} colorScheme='teal' size={{base:"lg", lg:"xs"}}>create new travelguide</Button>
             </WrapItem>
-        </>
+        </Box>
     )
 
 }

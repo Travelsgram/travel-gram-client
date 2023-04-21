@@ -20,9 +20,14 @@ code {
   color: white;
 }
 .lightBody{
+  background-image: url("./images/backgroundLightTwo.jpeg");
+  background-repeat: repeat;
+  
   background-color: #ffdca9;
 }
 .darkBody{
+  background-image: url("./images/backgroundDarkTwo.jpeg");
+  background-repeat: repeat;
   background-color: black;
   color: white;
 }
@@ -31,8 +36,9 @@ code {
   color: white;
 }
 .lightCard{
-  background-color: aqua;
+  background-color: #ffdca9;
 }
+
 .theme-btn {
   padding: 2px 15px;
   font-size: 1rem;

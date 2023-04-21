@@ -22,7 +22,7 @@ function UserProfilePage(){
     const [showPosts, setShowPosts] = useState(true)
     
     const { storedToken, user, logOutUser } = useContext(AuthContext);
-    const { bodyTheme } = useContext(ThemeContext);
+    const { bodyTheme, cardsTheme, boxTheme } = useContext(ThemeContext);
     
 
     useEffect( () => {
@@ -203,7 +203,7 @@ function UserProfilePage(){
                 
                   curUser.posts.map(post => {
                     return(
-                      <Card key={post._id} maxW='xs' >
+                      <Card key={post._id} maxW='xs' bg={boxTheme} >
                         <CardBody textAlign='left'>
                           <Box display="flex" flexDir="row" justifyContent="space-between" alignItems="center">
                             <Text as='em' fontSize='xs'>{post.location}</Text>
@@ -358,7 +358,7 @@ function UserProfilePage(){
                 
                 curUser.followers.map(follower => {
                   return(
-                    <Box   borderRadius="10px" my={2} boxShadow='base' key={follower._id} display="flex" flexDirection="column" alignItems="center" >
+                    <Box   borderRadius="10px" my={3} boxShadow='base' key={follower._id} display="flex" flexDirection="column" alignItems="center" className={cardsTheme} >
                       <Link to={"/users/"+follower._id}>
                       <Image
                         borderRadius='full'

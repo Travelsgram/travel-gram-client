@@ -46,6 +46,7 @@ function Signup(props){
               <label>Name:</label>
               <Input 
                 my={1}
+                maxLength="13"
                 errorBorderColor='red.300'
                 variant='filled'  
                 type="text"

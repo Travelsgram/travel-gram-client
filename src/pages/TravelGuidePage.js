@@ -10,7 +10,7 @@ import { ThemeContext } from "../context/theme.context";
 export default function TravelGuidePage() {
     const [travelguide, setTravelGuide] = useState(null);
     const {storedToken} = useContext(AuthContext);
-    const { bodyTheme, cardsTheme } = useContext(ThemeContext)
+    const { bodyTheme, boxTheme } = useContext(ThemeContext)
 
     useEffect(() => {
         axios
@@ -40,6 +40,7 @@ export default function TravelGuidePage() {
                   overflow='hidden'
                   variant='outline'
                   width="80vw"
+                  bg={boxTheme}
               
                 
                 >
@@ -102,12 +103,12 @@ export default function TravelGuidePage() {
           {bodyTheme === "lightBody" ?
             <PacmanLoader
               color="black"
-              size={60}
+              size={70}
             />
           :
             <PacmanLoader
-              color="yellow"
-              size={60}
+              color="gray"
+              size={70}
             />
           }
           </Box>
